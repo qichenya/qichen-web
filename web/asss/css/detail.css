@@ -1,0 +1,266 @@
+body {
+    overflow-x: hidden;
+}
+
+/* Header */
+header {
+    width: 100vw;
+    height: 100vh;
+    background-position: bottom;
+    background-size: cover;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.header_content {
+    margin-bottom: 10.25em;
+    text-align: center;
+}
+
+.video_body {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.video_body video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+.content {
+    position: absolute;
+    left: 50%;
+    /*保证文字内容始终居中*/
+    transform: translate(-50%, -30%);
+    width: 100%;
+    height: 100%;
+}
+
+.content h2 {
+    font-size: 6vmin;
+    font-weight: 400;
+    margin: 0 0 0;
+}
+
+.line {
+    width: 150px;
+    height: 4px;
+    background: #e44c65;
+    margin: 0.65em auto;
+    border-radius: 4px;
+}
+
+.content h1 {
+    font-size: 7vmin;
+    margin: 1.25em 0 0.75em;
+}
+
+.col a,
+.header_content a,
+.explore_content a {
+    text-align: center;
+    border-radius: 50px;
+}
+
+/* Events */
+section {
+    width: 100%;
+    padding: 4.75em 2.25em 2.25em 2.25em;
+}
+
+.title {
+    text-align: center;
+    font-size: 4vmin;
+    font-weight: 400;
+}
+
+.row {
+    display: flex;
+    width: 100%;
+    margin: 0 0 0 0;
+    justify-content: space-between;
+}
+
+.row .col {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    align-items: center;
+    padding: 2.25em 2.25em 0;
+}
+
+.col img {
+    width: 70%;
+    height: 320px;
+}
+
+.col h4 {
+    font-size: 3vmin;
+    padding: 0.65em 0 0;
+}
+
+.col p {
+    padding: 0 1.25em;
+}
+
+/* Explore */
+#explore {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 4.75em 0 2.25em 0;
+}
+
+.explore_img {
+    width: 100%;
+    height: 100vh;
+    margin-top: -38px;
+}
+
+.explore_img img {
+    position: absolute;
+    object-fit: cover;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+.explore_content {
+    width: 70%;
+    padding: 1.25em 0 0 2.25em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+}
+
+.explore_content h1 {
+    font-size: 6vmin;
+    line-height: 60px;
+    margin: 0.75em 0 0 0;
+}
+
+.explore_content .line {
+    margin-bottom: 1.45em;
+}
+
+.explore_content p {
+    padding: 0 0 0 1.25em;
+}
+
+/* Tours */
+#tours .img_gallery {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.content_col {
+    width: 40%;
+}
+
+.content_col h1 {
+    font-size: 6vmin;
+    line-height: 60px;
+    margin: 1.25em 0 0 0;
+}
+
+.content_col p {
+    padding: 0;
+    margin: 1.25em auto;
+}
+
+.image_col {
+    width: 60%;
+}
+
+.img_gallery {
+    padding: 0 0 2.25em 0;
+}
+
+.img_gallery img {
+    max-width: 250px;
+    height: 200px;
+    margin: 0.75em;
+}
+
+/* Mobile device */
+@media only screen and (max-width: 850px) {
+
+    /* Events */
+    .row {
+        flex-direction: column;
+    }
+
+    .row .col {
+        width: 100%;
+        margin: 0.75 auto;
+    }
+
+    .col p {
+        text-align: center;
+    }
+
+    .col img {
+        max-width: 80%;
+        height: 40%;
+    }
+
+    /* Explore */
+    .explore_content {
+        width: 100%;
+    }
+
+    /* Tours */
+    #tours .col {
+        text-align: center;
+        width: 100%;
+    }
+
+    .content_col .line {
+        margin: 0.65em auto;
+    }
+
+    .img_gallery {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .img_gallery img {
+        max-width: 270px;
+        margin: 1.25em 0;
+    }
+}
+
+/* Animations */
+.col img,
+.img_gallery img {
+    cursor: pointer;
+    opacity: 0.6;
+    border-radius: 4px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.75);
+    transition: all 0.3s ease-in-out;
+}
+
+.col img:hover,
+.img_gallery img:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}

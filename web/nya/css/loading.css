@@ -1,0 +1,42 @@
+/* loading.css */
+
+.loader {
+  position: fixed;
+  right: 20px; /* 距离屏幕右边缘的距离 */
+  bottom: 20px; /* 距离屏幕底部的距离 */
+  width: fit-content;
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 50px;
+  background: linear-gradient(135deg,#0000 calc(50% - 0.5em),#000 0 calc(50% + 0.5em),#0000 0) right/300% 100%;
+  animation: loadingAnimation 2s infinite;
+}
+
+.loader::before {
+  content: "Loading...";
+  color: #0000;
+  padding: 0 5px;
+  background: inherit;
+  background-image: linear-gradient(135deg,#000 calc(50% - 0.5em),#fff 0 calc(50% + 0.5em),#000 0);
+  -webkit-background-clip:text;
+  background-clip:text;
+  animation: textAnimation 3s forwards; /* 3秒后执行文字动画 */
+}
+
+@keyframes loadingAnimation {
+  100% {
+    background-position: left;
+  }
+}
+
+@keyframes textAnimation {
+  0% {
+    content: "loading...";
+  }
+  30% {
+    content: "loading...";
+  }
+  100% {
+    content: "loading...";
+  }
+}

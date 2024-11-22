@@ -1,0 +1,178 @@
+/* persional */
+header.major {
+    margin: 5.25em 2.25em 1.5em 1.25em;
+    position: relative;
+    text-align: center;
+}
+header.major h2 {
+    margin: 0 0 0.3em;
+}
+
+h3{
+    margin: 0 0 0.2em 0;
+}
+p {
+    margin: 0 0 0 0;
+}
+
+.img.major {
+    background: #272833;
+    border-radius: 100%;
+    cursor: default;
+    display: inline-block;
+    height: 6em;
+    line-height: 6em;
+    margin: 0 0 2em 0;
+    text-align: center;
+    width: 6em;
+    overflow: hidden;
+}
+
+.img.major img {
+    width: 100%;
+    height: 100%;
+}
+
+.introduction-title {
+    padding: 0 0 2em 2em;
+    position: relative;
+}
+
+.introduction-title h2 {
+    color: #ffffff;
+    font-weight: 300;
+    line-height: 1em;
+    margin: 0 0 0 0.3em;
+}
+
+.introduction-title:after {
+    background: #39c088;
+    content: '';
+    display: inline-block;
+    height: 0.2em;
+    max-width: 10em;
+    width: 75%;
+}
+
+.introduction-main {
+    display: flex;
+    width: 100%;
+}
+.introduction-main .left {
+    display: flex;
+    height: 6em;
+    padding: 0 2em 0 4em;
+    justify-content: center;
+}
+
+.introduction-main .text {
+    padding: 0 0 0 2em;
+}
+
+.wrapper {
+    padding: 0 2.25em 2.25em 6.25em;
+}
+
+.introduction-main .hat {
+    width: 2em;
+    height: 2em;
+    margin: 0 0 2em 2.6em;
+}
+
+.introduction-main .hat img {
+    height: 100%;
+}
+
+.introduction-main .text .time {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 2.2em;
+    margin: 0.3em 0 0 -0.1em;
+}
+
+.introduction-main .text .time .icon {
+    width: 26px;
+    height: 26px;
+    margin: 0 0.4em 0 0;
+}
+
+.introduction-main .text .time .icon img {
+    width: 100%;
+    height: 100%;
+}
+
+.introduce {
+    display: flex;
+    width: 100%;
+    padding: 2.25em 0 0 0;
+}
+
+.introduce .left {
+    width: 54%;
+}
+
+.introduce .right {
+    width: 46%;
+    height: 100%;
+    padding: 0 4.25em 0 0;
+}
+
+.introduction-content {
+    padding: 0 0 0 2em;
+}
+
+.introduction-content .title {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.progress {
+    position: relative;
+    width: 100%;
+    height: 0.25em;
+    margin: 0.5em 0 2em 0;
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 7px;
+}
+
+.progress-in {
+    position: absolute;
+    height: 0.25em;
+    left: 0;
+    top: 0;
+    border-radius: 7px;
+}
+
+.progress.style1 .progress-in {
+    width: 80%;
+    background: #e44c65;
+}
+
+.progress.style2 .progress-in {
+    width: 60%;
+    background: #5480f1;
+}
+
+.progress.style3 .progress-in {
+    width: 83%;
+    background: #39c088;
+}
+
+.progress.style4 .progress-in {
+    width: 90%;
+    background: #e44c65;
+}
+
+.progress.style5 .progress-in {
+    width: 73%;
+    background: #5480f1;
+}
+
+.progress.style6 .progress-in {
+    width: 63%;
+    background: #39c088;
+}
+
