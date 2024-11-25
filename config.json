@@ -1,8 +1,8 @@
 {
     "title": "七辰 の 个人网站",
     "theme": {
-        "theme": "defdark",
-        "displayName": "Default",
+        "theme": "shizuku",
+        "displayName": "Shizuku",
         "colors": {
             "autoSwitch": {
                 "displayName": "Auto",
