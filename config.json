@@ -1,5 +1,5 @@
 {
-    "title": "成成0v0 の 个人网站",
+    "title": "七辰 の 个人网站",
     "theme": {
         "theme": "defdark",
         "displayName": "Default",
@@ -19,14 +19,13 @@
         }
     },
     "masterInfo": {
-        "name": "成成0v0",
+        "name": "七辰",
         "avatar": "./assets/images/avatar.png",
-        "website": "https://hic.top",
+        "website": "https://zako.fun",
         "socialLink": {
             "link": {
-                "bilibili": "https://space.bilibili.com/675279872",
-                "github": "https://github.com/ChengCheng0v0",
-                "email": "javascript:showEmail()"
+                "bilibili": "https://b23.tv/0Q8MOhV",
+                "github": "https://github.com/qichenya",
             },
             "icon": {
                 "bilibili": "fa-brands fa-bilibili",
