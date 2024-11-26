@@ -14,14 +14,18 @@
                     "background": "linear-gradient(45deg, #eeeeee 50%, #1c1c1c 50%)"
                 }
             },
-            "enable": ["light", "!autoSwitch", "dark"],
+            "enable": [
+                "light",
+                "!autoSwitch",
+                "dark"
+            ],
             "default": "!autoSwitch"
         }
     },
     "masterInfo": {
         "name": "七辰",
         "avatar": "./assets/images/avatar.png",
-        "website": "https://zako.fun",
+        "website": "https://shizuku.wiki",
         "socialLink": {
             "link": {
                 "bilibili": "https://b23.tv/0Q8MOhV",
@@ -32,11 +36,18 @@
                 "github": "fa-brands fa-github",
                 "email": "fa-solid fa-envelope"
             },
-            "enable": ["bilibili", "github", "email"]
+            "enable": [
+                "bilibili",
+                "github",
+                "email"
+            ]
         }
     },
     "pageHead": {
-        "typedContent": ["求知若饥，虚心若愚", "Stay Hungry Stay Foolish"]
+        "typedContent": [
+            "自由，或死亡。",
+            "Freedom or death"
+        ]
     },
     "icp": {
         "info": {
@@ -51,6 +62,8 @@
                 "no": "https://example.com"
             }
         },
-        "enable": ["no"]
+        "enable": [
+            "no"
+        ]
     }
 }
