@@ -52,14 +52,14 @@
     "icp": {
         "info": {
             "code": {
-                "no": "这个家伙没有备案...",
+                "no": "笨蛋没有备案啦～",
                 "china": "X-ICP备XXXXXXXXXX号",
                 "moegov": "萌ICP备XXXXXXXX号"
             },
             "link": {
-                "china": "https://beian.miit.gov.cn",
-                "moegov": "https://icp.gov.moe/?keyword=xxxxxxxx",
-                "no": "https://example.com"
+                "china": "https://zako.fun",
+                "moegov": "https://zako.fun",
+                "no": "https://zako.fun"
             }
         },
         "enable": [
