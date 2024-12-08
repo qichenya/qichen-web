@@ -27,7 +27,7 @@
 -  **Email**: [qichenawa@outlook.com](mailto:qichenawa@outlook.com)  
 -  **QQ**: 3654280169  
 -  **GitHub**: [qichenya](https://github.com/qichenya)  
--  **Discord**: qichenya  
+-  **Discord**: shizuku_qichen 
 -  **Telegram**: [qichenya](https://t.me/qichenya)  
 -  **X**: [qichen1528770](https://x.com/qichen1528770)  
 -  **YouTube**: [cn-qichen](https://www.youtube.com/@cn-qichen)  
