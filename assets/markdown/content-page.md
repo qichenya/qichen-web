@@ -44,9 +44,3 @@
 ---
 ### **我喜欢的音乐**
 <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=507795306&auto=1&height=66"></iframe>
-
----
-### **其他站点**
-- **博客站(停止运营)**：[点击跳转](https://zako.fun) 
-
-
