@@ -1,0 +1,40 @@
+{
+    "id": "shizuku",
+    "name": "Shizuku",
+    "version": "1.0.0",
+    "author": "成成0v0 (hic.top, chengcheng@miao.ms)",
+    "repo": "https://github.com/qichenya/Shizuku",
+    "files": {
+        "styles": ["elements.css", "index.css"],
+        "scripts": []
+    },
+    "colors": {
+        "list": {
+            "light": {
+                "displayName": "软化成成",
+                "files": {
+                    "styles": [],
+                    "scripts": []
+                },
+                "icon": {
+                    "icon": "fa-solid fa-sun",
+                    "color": "#000000",
+                    "background": "#eeeeee"
+                }
+            },
+            "dark": {
+                "displayName": "黑化成成",
+                "files": {
+                    "styles": ["elements.css", "index.css"],
+                    "scripts": []
+                },
+                "icon": {
+                    "icon": "fa-solid fa-moon",
+                    "color": "#ffffff",
+                    "background": "#1c1c1c"
+                }
+            }
+        },
+        "index": ["light", "dark"]
+    }
+}
