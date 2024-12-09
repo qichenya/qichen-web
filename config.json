@@ -54,15 +54,15 @@
             "code": {
                 "no": "笨蛋没有备案啦～",
                 "china": "X-ICP备XXXXXXXXXX号",
-                "moegov": "萌ICP备XXXXXXXX号"
+                "moegov": "萌ICP备20240705号"
             },
             "link": {
-                "china": "https://zako.fun",
-                "moegov": "https://zako.fun",
-                "no": "https://zako.fun"
+                "china": "https://shizuku.uno",
+                "moegov": "https://shizuku.uno",
+                "no": "https://shizuku.uno"
             }
         },
-        "enable": [
+        "moejov": [
             "no"
         ]
     }
