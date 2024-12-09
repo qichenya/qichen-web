@@ -28,6 +28,6 @@
 
 ## 联系
 
-- E-mail：qichenstudio@icloud.com
+- E-mail：qichenawa@outlook.com
 - Telegram：@qichenya
-- Discord：qichenya
+- Discord：shizuku_qichen
