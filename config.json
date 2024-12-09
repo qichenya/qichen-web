@@ -58,12 +58,10 @@
             },
             "link": {
                 "china": "https://shizuku.uno",
-                "moegov": "https://shizuku.uno",
+                "moegov": "https://icp.gov.moe/?keyword=20240705",
                 "no": "https://shizuku.uno"
             }
         },
-        "moejov": [
-            "no"
-        ]
+        "moejov":["moegov"]
     }
 }
