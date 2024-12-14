@@ -52,14 +52,12 @@
     "icp": {
         "info": {
             "code": {
-                "no": "笨蛋没有备案啦～",
                 "china": "X-ICP备XXXXXXXXXX号",
                 "moegov": "萌ICP备20240705号"
             },
             "link": {
-                "china": "https://shizuku.uno",
-                "moegov": "https://icp.gov.moe/?keyword=20240705",
-                "no": "https://shizuku.uno"
+                "china": "https://shizuku.website",
+                "moegov": "https://icp.gov.moe/?keyword=20240705"
             }
         },
         "moejov":["moegov"]
