@@ -2,19 +2,6 @@
 
 一个二次元风格的个人主页！  
 
-## 预览
-
-[https://acg-home.pages.dev](https://acg-home.pages.dev)
-
-![_20241016_002741.png](https://s2.loli.net/2024/10/16/fvapGBQDeRkzTHh.png)
-
-> [!TIP]  
-> 上面的预览链接中的内容会即时同步 `main` 分支的更改，但预览图就不一定会及时更新了哦。
-
----
-
-项目的开发工作会在 `develop` 分支中进行，对于最新的改动预览请查看：[https://develop.acg-home.pages.dev](https://develop.acg-home.pages.dev)。
-
 ## 介绍
 
 这是一个简单的个人网站，没有太多花里花哨的东西。  
