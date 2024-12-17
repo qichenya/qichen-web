@@ -62,6 +62,6 @@
                 "no": "https://shizuku.uno"
             }
         },
-        "moejov":["moegov"]
+        "enable":["moegov"]
     }
 }
