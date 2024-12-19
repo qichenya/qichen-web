@@ -10,15 +10,9 @@
 ---
 
 ## **我的技能**  
-### **前端开发**  
- **技术栈**:  
-- **HTML**: 熟练使用语义化标签构建页面结构  
-- **CSS**: 掌握基础布局技巧，如 Flexbox 和 Grid  
-- **JavaScript**: 能够完成基础交互和 DOM 操作  
-
 ### **开发运维与系统管理**  
  **系统技能**:  
-- **Linux**: 熟悉常用命令与基础运维操作  
+- **Linux**: 能够完成基础例行维护及操作  
 - **MySQL**: 能够完成基本的表设计和数据查询  
 
 ---
@@ -40,7 +34,3 @@
 
 - [**Alice in Cradle**](https://aliceincradle.com/)  
   一款幻想风格的冒险游戏，探索未知的世界，享受战斗与剧情的融合！
-
----
-### **我喜欢的音乐**
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=507795306&auto=1&height=66"></iframe>
