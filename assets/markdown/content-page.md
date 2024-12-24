@@ -28,7 +28,7 @@
 ---
 
 ## Github统计数据
-[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=qichenya)](https://github.com/qichenya/github-readme-stats)
+[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=qichenya)](https://github.com/anuraghazra/github-readme-stats)
 
 ---
 
