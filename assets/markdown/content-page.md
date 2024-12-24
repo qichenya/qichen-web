@@ -25,7 +25,10 @@
 -  **Telegram**: [qichenya](https://t.me/qichenya)  
 -  **X**: [qichen1528770](https://x.com/qichen1528770)  
 -  **YouTube**: [cn-qichen](https://www.youtube.com/@cn-qichen)  
+---
 
+## Github统计数据
+[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=qichenya)](https://github.com/qichenya/github-readme-stats)
 ---
 
 ##  **我喜欢的游戏**  
