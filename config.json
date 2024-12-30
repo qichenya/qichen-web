@@ -60,6 +60,6 @@
                 "moegov": "https://icp.gov.moe/?keyword=20240705"
             }
         },
-        "moejov":["moegov"]
+        "enable":["moegov"]
     }
 }
