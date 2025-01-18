@@ -12,6 +12,7 @@
 ## **我的技能**  
 ### **开发运维与系统管理**  
  **系统技能**:  
+- **Windows** ： 能够完成Windows基本使用及其安装和例行维护
 - **Linux**: 能够完成基础例行维护及操作  
 - **MySQL**: 能够完成基本的表设计和数据查询  
 
@@ -27,7 +28,7 @@
 -  **YouTube**: [cn-qichen](https://www.youtube.com/@cn-qichen)  
 ---
 
-## Github统计数据
+## Github统计数据(国内不支持查看)
 [![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=qichenya)](https://github.com/anuraghazra/github-readme-stats)
 
 ---
