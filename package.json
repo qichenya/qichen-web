@@ -1,0 +1,26 @@
+{
+  "name": "qichen-web",
+  "version": "1.0.0",
+  "description": "七辰的个人网站",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qichenya/qichen-web.git"
+  },
+  "keywords": [
+    "website"
+  ],
+  "author": "七辰, 成成0v0 (zako.fun | qichenawa@outlook.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/qichenya/qichen-web/issues"
+  },
+  "homepage": "https://github.com/qichenya/qichen-web#readme",
+  "devDependencies": {
+    "eslint": "^9.15.0",
+    "eslint-config-prettier": "^9.1.0"
+  }
+}
