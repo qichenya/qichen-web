@@ -34,5 +34,5 @@
 - [**Alice in Cradle**](https://aliceincradle.com/)  
   一款幻想风格的冒险游戏，探索未知的世界，享受战斗与剧情的融合！
 
-- [**千恋万花**](https://www.yuzu-soft.com)
+- [**千恋万花**](https://www.yuzu-soft.com
   Ciallo~
