@@ -1,0 +1,76 @@
+/* 全局样式 */
+body {
+    background-color: #e0e3d4;
+    color: #1c325b;
+}
+
+/* - 页首 */
+.page-head {
+    background-color: #fff5e0;
+    background-image: url(../images/page-head/wallhaven-l8o6o2.png);
+    background-size: cover;
+    background-position: center 20%;
+    transition: height ease 1s, margin ease-in 0.25s;
+
+    * {
+        transition: margin ease 1s, text-shadow ease 1s;
+    }
+}
+
+.page-head.expand {
+    height: 100vh;
+    margin-bottom: 30px;
+
+    * {
+        margin-top: calc(100vh * 0.25);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+}
+/* - 页首 End */
+
+/* 内容版块 */
+.primary-container > .right-area > .content-page {
+    background-color: #e5e3d4;
+}
+
+/* - 左侧卡片 */
+.primary-container > .left-area > .cards > .card-item {
+    background-color: #e5e3d4;
+}
+
+/* 个人信息 */
+.primary-container > .left-area > .cards > .card-item#personal-info > .social-icons i {
+    background-color: #9abf80;
+    color: #1c325b;
+}
+
+/* - 浏览设置 */
+.primary-container > .left-area > .cards > .card-item > .content > .settings-item {
+    padding: 8px 10px;
+    background-color: #d8e3d4;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+    color: unset;
+}
+
+/* 主题设置 */
+.primary-container > .left-area > .cards > .card-item > .content > .settings-item > .themes > .theme-item.enable {
+    box-shadow: unset;
+    border: 1px solid #9abf80;
+}
+/* - 浏览设置 End */
+
+/* - 左侧卡片 End */
+
+/* - 页脚 */
+.footer {
+    background-color: #d8e3d4;
+}
+
+.footer > .line-break {
+    color: #1c325b;
+}
+
+.footer .icp-link {
+    color: #1c325b;
+}
+/* - 页脚 End */

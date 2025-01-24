@@ -1,0 +1,65 @@
+/* - 滚动条 */
+body::-webkit-scrollbar {
+    width: 4px;
+}
+
+body::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0);
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #9abf80;
+    border-radius: 4px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: #9abf80;
+    border-radius: 4px;
+}
+
+body::-webkit-scrollbar-thumb:active {
+    background: #9abf80;
+    border-radius: 4px;
+}
+/* - 滚动条 End */
+
+/* 文本选中 */
+::selection {
+    text-decoration: unset;
+    text-decoration-color: unset;
+    text-shadow: unset;
+    background-color: #9abf80;
+}
+
+/* - 分割线 */
+hr {
+    border: 2px dashed #9abf80;
+}
+
+hr:before {
+    color: #6abf80;
+}
+/* - 分割线 End */
+
+/* - 标题 */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #6a669d;
+}
+
+/* - 超链接 */
+a {
+    color: #f59768;
+    background: linear-gradient(to right, #f5d09f, #f5d09f) no-repeat right bottom;
+    background-size: 0 2px;
+}
+
+.right-area a:hover {
+    color: #f59768;
+}
+/* - 超链接 End */
+
