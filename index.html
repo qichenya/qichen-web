@@ -119,19 +119,14 @@ window.addEventListener("load", function() {
         .then(text => {
             const quotes = text.split('\n').filter(line => line.trim() !== '');
             if(quotes.length > 0) {
-                // 随机选择1-2条
-                const count = Math.random() > 0.5 ? 1 : 2;
-                const selected = [];
-                
-                for(let i = 0; i < count && i < quotes.length; i++) {
-                    const randomIndex = Math.floor(Math.random() * quotes.length);
-                    selected.push(quotes[randomIndex]);
-                    // 避免重复
-                    quotes.splice(randomIndex, 1);
+                // Fisher-Yates洗牌算法
+                for (let i = quotes.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [quotes[i], quotes[j]] = [quotes[j], quotes[i]];
                 }
                 
-                document.getElementById('random-hitokoto').innerHTML = 
-                    selected.join('<br>');
+                // 只显示第一条
+                document.getElementById('random-hitokoto').textContent = quotes[0];
             }
         });
 });
