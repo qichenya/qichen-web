@@ -9,12 +9,10 @@ body {
     background-color: #fff5e0;
     background-image: url(../images/page-head/wallhaven-l8o6o2.png);
     background-size: cover;
-    background-position: center 20%;
+    background-position: center center;  /* 修改为居中显示 */
+    background-repeat: no-repeat;      /* 添加防止重复 */
     transition: height ease 1s, margin ease-in 0.25s;
-
-    * {
-        transition: margin ease 1s, text-shadow ease 1s;
-    }
+    min-height: 300px;                  /* 添加最小高度 */
 }
 
 .page-head.expand {

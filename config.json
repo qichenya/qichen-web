@@ -25,7 +25,7 @@
     "masterInfo": {
         "name": "七辰",
         "avatar": "./assets/images/avatar.png",
-        "website": "https://shizuku.uno",
+        "website": "https://github.com/qichenya",
         "socialLink": {
             "link": {
                 "bilibili": "https://b23.tv/0Q8MOhV",
@@ -45,8 +45,8 @@
     },
     "pageHead": {
         "typedContent": [
-            "自由，或死亡。",
-            "Freedom or death"
+            "代码改变世界",
+            "Code changes the world"
         ]
     },
     "icp": {
@@ -56,10 +56,8 @@
                 "moegov": "萌ICP备20240705号"
             },
             "link": {
-                "china": "https://shizuku.uno",
-                "moegov": "https://icp.gov.moe/?keyword=20240705"
             }
         },
-        "enable":["moegov"]
+        "enable":[""]
     }
 }
