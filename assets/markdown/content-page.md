@@ -22,11 +22,6 @@
 
 ---
 
-## **GitHub统计数据**  
-[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=qichenya&show_icons=true&theme=radical)](https://github.com/anuraghazra/github-readme-stats)  
-
----
-
 ## **我喜欢的游戏**  
 - [**osu!**](https://osu.ppy.sh/)  
   节奏类游戏，充满挑战与乐趣，每次点按都是节奏的律动！  
