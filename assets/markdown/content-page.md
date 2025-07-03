@@ -11,7 +11,8 @@
 ## **我的技能**  
 - **Linux**: 能够完成基础例行维护及操作等  
 - **Windows**: 能够完成基础的系统维护及重装等  
-- **虚拟币交易**：能够熟练使用策略交易和现货交易
+- **中心化交易**：能够熟练使用策略交易和现货,合约交易且胜率在60%以上
+- **去中心化交易**：能够轻松使用Uniswap、SushiSwap等DEX进行交易
 
 ---
 
@@ -31,14 +32,6 @@
 - [**Alice in Cradle**](https://aliceincradle.com/)  
   一款幻想风格的冒险游戏，探索未知的世界，享受战斗与剧情的融合！ 
 
----
+- [**Minecraft**](https://www.minecraft.net/)  
+  沙盒建造游戏，创造属于自己的世界，发挥无限的想象力！
 
-## **我正在使用的交易所**
-- [**okx**](https://www.okx.com/zh-hans)  
-  用于现货交易和法币购买USDT（Tether USD）
-
-- [**binance**](https://www.binance.com/zh-CN)  
-  用于合约交易和期权交易
-
-- [**bybit**](https://www.bybit.com/zh-MY)  
-  用于开通使用虚拟卡和实体卡（USDT Card）
