@@ -11,12 +11,12 @@
     <link rel="stylesheet" href="./assets/styles/loaders.css" />
     <iframe id="global-loader-iframe" src="./loaders/global.html"></iframe>
 
-    <link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.css" />
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.0.0/css/all.css" />
 
-    <script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/alpinejs/3.9.0/cdn.min.js" defer></script>
-    <script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/sweetalert/2.1.2/sweetalert.min.js"></script>
-    <script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/typed.js/2.0.12/typed.js"></script>
-    <script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/markdown-it/12.3.2/markdown-it.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/alpinejs/3.14.9/cdn.min.js" defer></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/typed.js/2.0.12/typed.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/markdown-it/12.3.2/markdown-it.js"></script>
 
     <link rel="stylesheet" href="./assets/styles/elements.css" />
     <link rel="stylesheet" href="./assets/styles/index.css" />
@@ -75,12 +75,13 @@
 
     <div class="footer">
         <span class="icp-info">Loading...</span>
-       <!-- <span class="line-break"><i class="fa-solid fa-ellipsis"></i></span> -->
+        <!-- <span class="line-break"><i class="fa-solid fa-ellipsis"></i></span> -->
         <!-- 球球你别改这里可以嘛呜呜呜 (＞﹏＜) -->
         <!-- “[Loading...]”的实际内容可以在 config.json 的 masterInfo.info 项中修改哦~ -->
         <span>本站由 <span class="webmaster-info"><a :href="config.content.masterInfo.website" target="_blank"
-                    x-text="config.content.masterInfo.name">[Loading...]</a> 和 </span><a href="https://github.com/ChengCheng0v0"
-                target="_blank">成成0v0</a> 用 <i class="fa-solid fa-heart"></i> 制作</span>
+                    x-text="config.content.masterInfo.name">[Loading...]</a> 和 </span><a
+                href="https://github.com/ChengCheng0v0" target="_blank">成成0v0</a> 用 <i class="fa-solid fa-heart"></i>
+            制作</span>
         <span>Powered by <a href="https://github.com/ChengCheng0v0/ACG-Home" target="_blank">ACG-Home</a></span>
     </div>
 
@@ -113,21 +114,21 @@
 </html>
 
 <script>
-window.addEventListener("load", function() {
-    fetch('./assets/markdown/hitokoto.md')
-        .then(response => response.text())
-        .then(text => {
-            const quotes = text.split('\n').filter(line => line.trim() !== '');
-            if(quotes.length > 0) {
-                // Fisher-Yates洗牌算法
-                for (let i = quotes.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    [quotes[i], quotes[j]] = [quotes[j], quotes[i]];
+    window.addEventListener("load", function () {
+        fetch('/assets/markdown/hitokoto.md')
+            .then(response => response.text())
+            .then(text => {
+                const quotes = text.split('\n').filter(line => line.trim() !== '');
+                if (quotes.length > 0) {
+                    // Fisher-Yates洗牌算法
+                    for (let i = quotes.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [quotes[i], quotes[j]] = [quotes[j], quotes[i]];
+                    }
+
+                    // 只显示第一条
+                    document.getElementById('random-hitokoto').textContent = quotes[0];
                 }
-                
-                // 只显示第一条
-                document.getElementById('random-hitokoto').textContent = quotes[0];
-            }
-        });
-});
+            });
+    });
 </script>
