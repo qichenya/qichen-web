@@ -16,21 +16,13 @@
 ---
 
 ## **联系方式**  
-- **Email**: [qichenawa@outlook.com](mailto:qichenawa@outlook.com)  
+- **Email**: [qichenawa@outlook.com](mailto:qichenawa@outlook.com)  or [qichengongzuoshi@gmail.com](mailto:qichengongzuoshi@gmail.com)
 - **QQ**: 3654280169  
 - **GitHub**: [qichenya](https://github.com/qichenya)  
-- **WeChat**: Zero_qichen_studio  
-- **Telegram**：@neko_zako
+- **WeChat**: init_qichen  
+- **Telegram**：@qichen_sama
 
 ---
 
-## **我喜欢的游戏**  
-- [**osu!**](https://osu.ppy.sh/)  
-  节奏类游戏，充满挑战与乐趣，每次点按都是节奏的律动！  
-
-- [**Alice in Cradle**](https://aliceincradle.com/)  
-  一款幻想风格的冒险游戏，探索未知的世界，享受战斗与剧情的融合！ 
-
-- [**Minecraft**](https://www.minecraft.net/)  
-  沙盒建造游戏，创造属于自己的世界，发挥无限的想象力！
-
+## **我的人设**
+![七辰的人设图片]([https://github.com/qichenya/qichenya/blob/main/character_setting.png])
