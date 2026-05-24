@@ -1,7 +1,5 @@
-import React from 'react';
-import { Box, Toolbar } from '@mui/material';
+import { Box } from '@mui/material';
 import { Header } from './Header';
-import { Footer } from './Footer';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -9,20 +7,31 @@ interface LayoutProps {
   isDarkMode: boolean;
 }
 
-export const Layout: React.FC<LayoutProps> = ({ children, toggleTheme, isDarkMode }) => {
+export const Layout: React.FC<LayoutProps> = ({
+  children,
+  toggleTheme,
+  isDarkMode,
+}) => {
   return (
     <Box
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
         minHeight: '100vh',
+        backgroundColor: 'background.default',
       }}
     >
-      <Header toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
-      <Box component="main" sx={{ flexGrow: 1 }}>
+      <Header
+        toggleTheme={toggleTheme}
+        isDarkMode={isDarkMode}
+      />
+
+      <Box
+        component="main"
+        sx={{
+          pt: 10,
+        }}
+      >
         {children}
       </Box>
-      <Footer />
     </Box>
   );
 };
