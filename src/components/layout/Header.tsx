@@ -30,12 +30,8 @@ const navItems = [
   { label: '关于', path: '/about' },
 ];
 
-export const Header: React.FC<HeaderProps> = ({
-  toggleTheme,
-  isDarkMode,
-}) => {
+export const Header: React.FC<HeaderProps> = ({ toggleTheme, isDarkMode }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
-
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const location = useLocation();
@@ -66,10 +62,7 @@ export const Header: React.FC<HeaderProps> = ({
                   },
                 },
                 '&:hover': {
-                  backgroundColor: alpha(
-                    theme.palette.primary.main,
-                    0.08
-                  ),
+                  backgroundColor: alpha(theme.palette.primary.main, 0.08),
                 },
               }}
             >
@@ -91,14 +84,7 @@ export const Header: React.FC<HeaderProps> = ({
           boxShadow: 'none',
         }}
       >
-        <Toolbar
-          sx={{
-            maxWidth: 1200,
-            width: '100%',
-            mx: 'auto',
-            px: { xs: 2, md: 3 },
-          }}
-        >
+        <Toolbar sx={{ maxWidth: 1200, width: '100%', mx: 'auto', px: { xs: 2, md: 3 } }}>
           <Box sx={{ flexGrow: 1 }} />
 
           {isMobile ? (
@@ -111,16 +97,12 @@ export const Header: React.FC<HeaderProps> = ({
                   color: 'text.primary',
                   borderRadius: 2,
                   '&:hover': {
-                    backgroundColor: alpha(
-                      theme.palette.primary.main,
-                      0.08
-                    ),
+                    backgroundColor: alpha(theme.palette.primary.main, 0.08),
                   },
                 }}
               >
                 {isDarkMode ? <WbSunny /> : <Nightlight />}
               </IconButton>
-
               <IconButton
                 color="inherit"
                 onClick={handleDrawerToggle}
@@ -128,10 +110,7 @@ export const Header: React.FC<HeaderProps> = ({
                   color: 'text.primary',
                   borderRadius: 2,
                   '&:hover': {
-                    backgroundColor: alpha(
-                      theme.palette.primary.main,
-                      0.08
-                    ),
+                    backgroundColor: alpha(theme.palette.primary.main, 0.08),
                   },
                 }}
               >
@@ -139,13 +118,7 @@ export const Header: React.FC<HeaderProps> = ({
               </IconButton>
             </>
           ) : (
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 1,
-              }}
-            >
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
               {navItems.map((item) => (
                 <Box
                   key={item.path}
@@ -156,34 +129,24 @@ export const Header: React.FC<HeaderProps> = ({
                     px: 2,
                     py: 1,
                     borderRadius: 4,
-                    backgroundColor:
-                      location.pathname === item.path
-                        ? 'primary.container'
-                        : 'transparent',
-                    color:
-                      location.pathname === item.path
-                        ? 'primary.onContainer'
-                        : 'text.primary',
-                    fontWeight:
-                      location.pathname === item.path
-                        ? 600
-                        : 400,
+                    backgroundColor: location.pathname === item.path 
+                      ? 'primary.container' 
+                      : 'transparent',
+                    color: location.pathname === item.path 
+                      ? 'primary.onContainer' 
+                      : 'text.primary',
+                    fontWeight: location.pathname === item.path ? 600 : 400,
                     transition: 'all 0.2s ease',
                     '&:hover': {
-                      backgroundColor:
-                        location.pathname === item.path
-                          ? 'primary.container'
-                          : alpha(
-                              theme.palette.primary.main,
-                              0.08
-                            ),
+                      backgroundColor: location.pathname === item.path 
+                        ? 'primary.container' 
+                        : alpha(theme.palette.primary.main, 0.08),
                     },
                   }}
                 >
                   {item.label}
                 </Box>
               ))}
-
               <IconButton
                 onClick={toggleTheme}
                 sx={{
@@ -191,10 +154,7 @@ export const Header: React.FC<HeaderProps> = ({
                   color: 'text.primary',
                   borderRadius: 2,
                   '&:hover': {
-                    backgroundColor: alpha(
-                      theme.palette.primary.main,
-                      0.08
-                    ),
+                    backgroundColor: alpha(theme.palette.primary.main, 0.08),
                   },
                 }}
               >

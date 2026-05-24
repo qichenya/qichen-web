@@ -30,7 +30,6 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({
   return (
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
       <DialogTitle>选择搜索引擎</DialogTitle>
-
       <DialogContent>
         <List>
           {searchEngines.map((engine) => (
@@ -43,7 +42,6 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({
           ))}
         </List>
       </DialogContent>
-
       <DialogActions>
         <Button onClick={onClose}>取消</Button>
       </DialogActions>

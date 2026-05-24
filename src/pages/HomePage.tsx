@@ -18,7 +18,6 @@ const fadeIn = keyframes`
     filter: blur(10px);
     transform: scale(0.95);
   }
-
   100% {
     opacity: 1;
     filter: blur(0);
@@ -31,7 +30,6 @@ const slideUp = keyframes`
     opacity: 0;
     transform: translateY(30px);
   }
-
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -41,15 +39,8 @@ const slideUp = keyframes`
 export const HomePage: React.FC = () => {
   const theme = useTheme();
   const navigate = useNavigate();
-
   const [dialogOpen, setDialogOpen] = useState(false);
-<<<<<<< HEAD
-
-  const pressTimer =
-    useRef<ReturnType<typeof setTimeout> | null>(null);
-=======
   const pressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
->>>>>>> 39ff1c4 (feat: add initial project structure with HTML, SVG avatar, and Vite configuration)
 
   const handleMouseDown = () => {
     pressTimer.current = setTimeout(() => {
@@ -102,14 +93,7 @@ export const HomePage: React.FC = () => {
           background: 'background.default',
         }}
       >
-        <Container
-          maxWidth="md"
-          sx={{
-            textAlign: 'center',
-            position: 'relative',
-            zIndex: 1,
-          }}
-        >
+        <Container maxWidth="md" sx={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
           <Box
             sx={{
               animation: `${fadeIn} 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards`,
@@ -133,11 +117,7 @@ export const HomePage: React.FC = () => {
               }}
             >
               <Computer sx={{ fontSize: 18 }} />
-
-              <Typography
-                variant="body2"
-                fontWeight={500}
-              >
+              <Typography variant="body2" fontWeight={500}>
                 一只笨猫用AI构建的个人网站
               </Typography>
             </Box>
@@ -154,23 +134,18 @@ export const HomePage: React.FC = () => {
               sx={{
                 mb: 5,
                 fontWeight: 700,
-                fontSize: {
-                  xs: '2.25rem',
-                  md: '3rem',
-                },
+                fontSize: { xs: '2.25rem', md: '3rem' },
                 lineHeight: 1.2,
                 color: 'text.primary',
               }}
             >
               Hi！我是{' '}
-
               <Box
                 component="span"
                 sx={{
                   color: 'primary.main',
                   position: 'relative',
                   display: 'inline-block',
-
                   '&::after': {
                     content: '""',
                     position: 'absolute',
@@ -183,13 +158,9 @@ export const HomePage: React.FC = () => {
                     borderRadius: 3,
                     transform: 'scaleX(0)',
                     transformOrigin: 'left',
-                    animation:
-                      'underlineReveal 0.8s ease-out 1.2s forwards',
-
+                    animation: 'underlineReveal 0.8s ease-out 1.2s forwards',
                     '@keyframes underlineReveal': {
-                      to: {
-                        transform: 'scaleX(1)',
-                      },
+                      to: { transform: 'scaleX(1)' },
                     },
                   },
                 }}
@@ -205,14 +176,7 @@ export const HomePage: React.FC = () => {
               opacity: 0,
             }}
           >
-            <Box
-              sx={{
-                display: 'flex',
-                gap: 2,
-                justifyContent: 'center',
-                flexWrap: 'wrap',
-              }}
-            >
+            <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
               <Button
                 component={Link}
                 to="/about"
