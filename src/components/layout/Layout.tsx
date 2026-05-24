@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+import React from 'react';
+>>>>>>> 39ff1c4 (feat: add initial project structure with HTML, SVG avatar, and Vite configuration)
 import { Box } from '@mui/material';
 import { Header } from './Header';
 

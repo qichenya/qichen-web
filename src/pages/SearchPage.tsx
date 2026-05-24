@@ -7,7 +7,6 @@ import {
   Typography,
   InputAdornment,
   IconButton,
-  alpha,
 } from '@mui/material';
 import { Search, ArrowBack } from '@mui/icons-material';
 import { useSearchParams, useNavigate } from 'react-router-dom';

@@ -43,9 +43,13 @@ export const HomePage: React.FC = () => {
   const navigate = useNavigate();
 
   const [dialogOpen, setDialogOpen] = useState(false);
+<<<<<<< HEAD
 
   const pressTimer =
     useRef<ReturnType<typeof setTimeout> | null>(null);
+=======
+  const pressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+>>>>>>> 39ff1c4 (feat: add initial project structure with HTML, SVG avatar, and Vite configuration)
 
   const handleMouseDown = () => {
     pressTimer.current = setTimeout(() => {

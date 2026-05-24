@@ -6,7 +6,7 @@ import {
   Grid,
   Chip,
 } from '@mui/material';
-import { Build, GitHub, FolderOpen } from '@mui/icons-material';
+import { GitHub, FolderOpen } from '@mui/icons-material';
 import { projects } from '../data/projects';
 
 export const ProjectsPage: React.FC = () => {
