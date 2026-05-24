@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6750A4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#9C89B8;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#bg)"/>
+  <circle cx="200" cy="150" r="70" fill="rgba(255,255,255,0.3)"/>
+  <circle cx="200" cy="320" r="110" fill="rgba(255,255,255,0.2)"/>
+  <text x="200" y="180" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="white" text-anchor="middle">Q</text>
+  <text x="200" y="350" font-family="Arial, sans-serif" font-size="24" fill="white" text-anchor="middle">QI CHEN</text>
+</svg>
