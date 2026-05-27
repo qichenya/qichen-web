@@ -13,5 +13,5 @@ export const personalInfo = {
 喜欢折腾各种服务器和自动化工具，每天都在学习新东西。虽然还是新手，但有一颗热爱技术的心。
 
 目前主要在学习 Linux、容器化和自动化运维，希望以后能成为一个合格的运维工程师。`,
-  interests: ['Linux', 'Docker', 'Shell脚本', '自动化运维'],
+  interests: ['Linux Shell'],
 };

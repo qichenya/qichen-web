@@ -8,7 +8,7 @@ import {
   keyframes,
 } from '@mui/material';
 import { Terminal, Computer } from '@mui/icons-material';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { personalInfo } from '../data/personalInfo';
 import { SearchDialog } from '../components/SearchDialog';
 
@@ -38,7 +38,6 @@ const slideUp = keyframes`
 
 export const HomePage: React.FC = () => {
   const theme = useTheme();
-  const navigate = useNavigate();
   const [dialogOpen, setDialogOpen] = useState(false);
   const pressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -60,11 +59,6 @@ export const HomePage: React.FC = () => {
       clearTimeout(pressTimer.current);
       pressTimer.current = null;
     }
-  };
-
-  const handleSelectEngine = (engine: string) => {
-    setDialogOpen(false);
-    navigate(`/search?engine=${engine}`);
   };
 
   const handleTouchStart = () => {
@@ -205,7 +199,6 @@ export const HomePage: React.FC = () => {
       <SearchDialog
         open={dialogOpen}
         onClose={() => setDialogOpen(false)}
-        onSelectEngine={handleSelectEngine}
       />
     </Box>
   );
