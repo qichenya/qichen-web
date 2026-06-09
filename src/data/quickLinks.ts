@@ -1,5 +1,5 @@
 export const quickLinksMarkdown = `
-# qichrn的个人博客
+# qichen的个人博客
 https://qichen.icu
 
 # 七辰资源站
