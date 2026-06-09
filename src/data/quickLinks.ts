@@ -1,9 +1,15 @@
 export const quickLinksMarkdown = `
-# 个人网站
+# qichrn的个人博客
 https://qichen.icu
 
 # 七辰资源站
 https://res.qichen.ink
+
+# 4c01的个人博客
+https://4c01.cn
+
+# 罗伊的个人博客
+https://www.roysgensokyo.space
 `;
 
 interface ParsedLink {
