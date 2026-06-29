@@ -7,10 +7,10 @@ import {
   Chip,
 } from '@mui/material';
 import { Link as LinkIcon, OpenInNew } from '@mui/icons-material';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { friendLinks } from '../data/friendLinks';
 
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: (i: number) => ({
     opacity: 1,
@@ -18,7 +18,7 @@ const cardVariants = {
     transition: {
       delay: i * 0.1,
       duration: 0.4,
-      ease: [0.2, 0, 0, 1],
+      ease: 'easeOut',
     },
   }),
 };
@@ -116,7 +116,7 @@ export const LinksPage: React.FC = () => {
                     />
                   </Box>
                   <Typography
-                    variant="bodyMedium"
+                    variant="body2"
                     color="text.secondary"
                   >
                     {link.description}
@@ -126,8 +126,6 @@ export const LinksPage: React.FC = () => {
             ))}
           </AnimatePresence>
         </Box>
-
-        <Box sx={{ mt: 8, textAlign: 'center' }} />
       </Container>
     </Box>
   );
