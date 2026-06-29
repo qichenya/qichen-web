@@ -7,7 +7,7 @@ export const personalInfo = {
   github: 'https://github.com/qichenya',
   telegram: 'https://t.me/qichen_sama',
   linkedin: 'https://linkedin.com/in/qichen',
-  avatar: 'https://github.com/qichenya.png',
+  avatar: '/images/hand.png',
   bio: `一名刚刚踏入运维领域的初学者，正在努力学习和成长中~
 
 喜欢折腾各种服务器和自动化工具，每天都在学习新东西。虽然还是新手，但有一颗热爱技术的心。

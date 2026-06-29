@@ -5,38 +5,83 @@ import {
   Typography,
   Avatar,
   Divider,
+  CircularProgress,
 } from '@mui/material';
 import {
   LocationOn,
 } from '@mui/icons-material';
 import { personalInfo } from '../data/personalInfo';
 
-// 自定义头像组件，处理加载失败
+// 自定义头像组件，处理加载状态和加载失败
 const CustomAvatar: React.FC = () => {
+  const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
 
-  if (imageError) {
-    return null;
-  }
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
+
+  const handleImageError = () => {
+    setImageError(true);
+    setImageLoaded(true);
+  };
 
   return (
-    <Avatar
-      src={personalInfo.avatar}
-      alt={personalInfo.name}
-      onError={() => setImageError(true)}
+    <Box
       sx={{
         width: 120,
         height: 120,
         mx: 'auto',
         mb: 3,
-        fontSize: '2.5rem',
-        fontWeight: 700,
-        backgroundColor: 'primary.main',
-        boxShadow: '0 4px 20px rgba(61, 139, 139, 0.25)',
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
       }}
     >
-      {personalInfo.name[0]}
-    </Avatar>
+      {!imageLoaded && (
+        <CircularProgress
+          size={40}
+          sx={{
+            position: 'absolute',
+            zIndex: 1,
+          }}
+        />
+      )}
+      {imageError ? (
+        <Avatar
+          sx={{
+            width: 120,
+            height: 120,
+            fontSize: '2.5rem',
+            fontWeight: 700,
+            backgroundColor: 'primary.main',
+            boxShadow: '0 4px 20px rgba(61, 139, 139, 0.25)',
+          }}
+        >
+          {personalInfo.name[0]}
+        </Avatar>
+      ) : (
+        <Avatar
+          src={personalInfo.avatar}
+          alt={personalInfo.name}
+          onLoad={handleImageLoad}
+          onError={handleImageError}
+          sx={{
+            width: 120,
+            height: 120,
+            fontSize: '2.5rem',
+            fontWeight: 700,
+            backgroundColor: 'primary.main',
+            boxShadow: '0 4px 20px rgba(61, 139, 139, 0.25)',
+            opacity: imageLoaded ? 1 : 0,
+            transition: 'opacity 0.3s ease',
+          }}
+        >
+          {personalInfo.name[0]}
+        </Avatar>
+      )}
+    </Box>
   );
 };
 
