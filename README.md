@@ -8,6 +8,7 @@
 - 📱 **响应式设计** - 完美适配桌面和移动设备
 - ✨ **流畅动画** - 页面切换动画和入场动画效果
 - 🔗 **快捷链接** - 长按主页按钮快速访问常用网站
+- 🔗 **友链** - 展示朋友们的网站
 
 ## 🚀 快速开始
 
@@ -45,10 +46,12 @@ src/
 ├── pages/
 │   ├── HomePage.tsx         # 首页
 │   ├── AboutPage.tsx        # 关于页
+│   ├── LinksPage.tsx        # 友链页
 │   └── SearchPage.tsx       # 搜索页
 ├── data/
 │   ├── personalInfo.ts      # 个人信息数据
-│   └── quickLinks.ts       # 快捷链接配置
+│   ├── friendLinks.ts       # 友链数据
+│   └── quickLinks.ts        # 快捷链接配置
 ├── theme/
 │   └── theme.ts            # 主题配置（含 10 种配色方案）
 ├── App.tsx                 # 主应用组件
@@ -92,6 +95,20 @@ https://4c01.cn
 - 使用 `# 名称` 来定义链接的显示名称
 - 名称后面紧跟 URL
 - 每个链接组之间用空行分隔
+
+### 配置友链
+
+编辑 `src/data/friendLinks.ts` 文件来管理友链：
+
+```typescript
+export const friendLinks: FriendLink[] = [
+  {
+    name: '4C01',
+    url: 'https://4c01.cn',
+    description: '一只笨猫的个人介绍',
+  },
+];
+```
 
 ### 添加新配色
 

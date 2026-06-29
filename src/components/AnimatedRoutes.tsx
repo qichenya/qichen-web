@@ -3,6 +3,7 @@ import { useLocation, Routes, Route } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { HomePage } from '../pages/HomePage';
 import { AboutPage } from '../pages/AboutPage';
+import { LinksPage } from '../pages/LinksPage';
 import { SearchPage } from '../pages/SearchPage';
 
 const pageVariants = {
@@ -35,6 +36,7 @@ export const AnimatedRoutes: React.FC = () => {
         <Routes location={location}>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/links" element={<LinksPage />} />
           <Route path="/search" element={<SearchPage />} />
         </Routes>
       </motion.div>

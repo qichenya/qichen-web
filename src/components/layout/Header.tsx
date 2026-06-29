@@ -28,6 +28,7 @@ interface HeaderProps {
 const navItems = [
   { label: '首页', path: '/' },
   { label: '关于', path: '/about' },
+  { label: '友链', path: '/links' },
 ];
 
 export const Header: React.FC<HeaderProps> = ({ toggleTheme, isDarkMode }) => {
