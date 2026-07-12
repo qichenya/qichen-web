@@ -13,7 +13,7 @@ export const LinksPage: React.FC = () => {
   const reduceMotion = useReducedMotion();
 
   return (
-    <Box sx={{ minHeight: '100vh', py: { xs: 11, md: 14 }, overflow: 'hidden', background: `radial-gradient(circle at 15% 10%, ${theme.palette.secondary.main}20 0, transparent 24%), ${theme.palette.background.default}` }}>
+    <Box sx={{ minHeight: '100vh', py: { xs: 11, md: 14 }, overflow: 'hidden', bgcolor: 'background.default' }}>
       <Container maxWidth="lg">
         <MotionBox
           initial={reduceMotion ? false : { opacity: 0, y: 20 }}

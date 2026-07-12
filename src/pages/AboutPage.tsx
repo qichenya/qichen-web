@@ -46,7 +46,7 @@ export const AboutPage: React.FC = () => {
   ];
 
   return (
-    <Box sx={{ minHeight: '100vh', py: { xs: 11, md: 14 }, overflow: 'hidden', background: `radial-gradient(circle at 88% 8%, ${theme.palette.primary.main}20 0, transparent 24%), ${theme.palette.background.default}` }}>
+    <Box sx={{ minHeight: '100vh', py: { xs: 11, md: 14 }, overflow: 'hidden', bgcolor: 'background.default' }}>
       <Container maxWidth="lg">
         <MotionBox {...enter(0)} sx={{ display: 'flex', alignItems: { xs: 'flex-start', md: 'center' }, flexDirection: { xs: 'column', md: 'row' }, gap: { xs: 3, md: 5 }, mb: { xs: 6, md: 9 } }}>
           <ProfileAvatar />
