@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation, Routes, Route } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { HomePage } from '../pages/HomePage';
 import { AboutPage } from '../pages/AboutPage';
 import { LinksPage } from '../pages/LinksPage';
@@ -23,14 +23,15 @@ const pageVariants = {
 
 export const AnimatedRoutes: React.FC = () => {
   const location = useLocation();
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <AnimatePresence mode="wait">
       <motion.div
         key={location.pathname}
-        initial="initial"
+        initial={shouldReduceMotion ? false : 'initial'}
         animate="in"
-        exit="out"
+        exit={shouldReduceMotion ? undefined : 'out'}
         variants={pageVariants}
       >
         <Routes location={location}>

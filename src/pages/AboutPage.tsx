@@ -1,179 +1,98 @@
 import React, { useState } from 'react';
-import {
-  Box,
-  Container,
-  Typography,
-  Avatar,
-  Divider,
-  CircularProgress,
-} from '@mui/material';
-import {
-  LocationOn,
-} from '@mui/icons-material';
+import { Avatar, Box, Chip, CircularProgress, Container, Divider, Stack, Typography, useTheme } from '@mui/material';
+import { AlternateEmail, ArrowOutward, GitHub, LocationOn, Telegram } from '@mui/icons-material';
+import { motion, useReducedMotion } from 'framer-motion';
 import { personalInfo } from '../data/personalInfo';
 
-// 自定义头像组件，处理加载状态和加载失败
-const CustomAvatar: React.FC = () => {
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [imageError, setImageError] = useState(false);
+const MotionBox = motion(Box);
 
-  const handleImageLoad = () => {
-    setImageLoaded(true);
-  };
-
-  const handleImageError = () => {
-    setImageError(true);
-    setImageLoaded(true);
-  };
+const ProfileAvatar: React.FC = () => {
+  const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState(false);
 
   return (
-    <Box
-      sx={{
-        width: 120,
-        height: 120,
-        mx: 'auto',
-        mb: 3,
-        position: 'relative',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      {!imageLoaded && (
-        <CircularProgress
-          size={40}
-          sx={{
-            position: 'absolute',
-            zIndex: 1,
-          }}
-        />
-      )}
-      {imageError ? (
-        <Avatar
-          sx={{
-            width: 120,
-            height: 120,
-            fontSize: '2.5rem',
-            fontWeight: 700,
-            backgroundColor: 'primary.main',
-            boxShadow: '0 4px 20px rgba(61, 139, 139, 0.25)',
-          }}
-        >
-          {personalInfo.name[0]}
-        </Avatar>
-      ) : (
-        <Avatar
-          src={personalInfo.avatar}
-          alt={personalInfo.name}
-          onLoad={handleImageLoad}
-          onError={handleImageError}
-          sx={{
-            width: 120,
-            height: 120,
-            fontSize: '2.5rem',
-            fontWeight: 700,
-            backgroundColor: 'primary.main',
-            boxShadow: '0 4px 20px rgba(61, 139, 139, 0.25)',
-            opacity: imageLoaded ? 1 : 0,
-            transition: 'opacity 0.3s ease',
-          }}
-        >
-          {personalInfo.name[0]}
-        </Avatar>
-      )}
+    <Box sx={{ position: 'relative', width: { xs: 116, md: 142 }, height: { xs: 116, md: 142 } }}>
+      {!loaded && <CircularProgress size={36} sx={{ position: 'absolute', top: '40%', left: '40%' }} />}
+      <Avatar
+        src={error ? undefined : personalInfo.avatar}
+        alt={personalInfo.name}
+        onLoad={() => setLoaded(true)}
+        onError={() => { setError(true); setLoaded(true); }}
+        sx={{
+          width: '100%', height: '100%', fontSize: '2.5rem', fontWeight: 800, bgcolor: 'primary.main', opacity: loaded ? 1 : 0,
+          border: '5px solid', borderColor: 'background.paper', boxShadow: '0 18px 42px rgba(60, 53, 120, 0.24)', transition: 'opacity 0.25s ease',
+        }}
+      >
+        {personalInfo.name[0]}
+      </Avatar>
+      <Box sx={{ position: 'absolute', right: 5, bottom: 5, width: 18, height: 18, borderRadius: '50%', bgcolor: '#59C783', border: '3px solid', borderColor: 'background.paper' }} />
     </Box>
   );
 };
 
 export const AboutPage: React.FC = () => {
+  const theme = useTheme();
+  const reduceMotion = useReducedMotion();
+  const enter = (delay: number) => ({
+    initial: reduceMotion ? false : { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.55, delay },
+  });
+
+  const contacts = [
+    { label: 'Email', value: personalInfo.email, href: `mailto:${personalInfo.email}`, icon: <AlternateEmail /> },
+    { label: 'GitHub', value: 'qichenya', href: personalInfo.github, icon: <GitHub /> },
+    { label: 'Telegram', value: 'qichen_sama', href: personalInfo.telegram, icon: <Telegram /> },
+  ];
+
   return (
-    <Box sx={{ py: { xs: 6, md: 10 } }}>
-      <Container maxWidth="md">
-        <Box sx={{ textAlign: 'center', mb: 8 }}>
-          <CustomAvatar />
-
-          <Typography variant="h3" sx={{ mb: 1, fontWeight: 600 }}>
-            {personalInfo.name}
-          </Typography>
-          <Typography
-            variant="h6"
-            color="primary.main"
-            sx={{ mb: 2, fontWeight: 500 }}
-          >
-            {personalInfo.title}
-          </Typography>
-
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1, mb: 4 }}>
-            <LocationOn sx={{ fontSize: 18, color: 'text.secondary' }} />
-            <Typography variant="body2" color="text.secondary">
-              {personalInfo.location}
-            </Typography>
+    <Box sx={{ minHeight: '100vh', py: { xs: 11, md: 14 }, overflow: 'hidden', background: `radial-gradient(circle at 88% 8%, ${theme.palette.primary.main}20 0, transparent 24%), ${theme.palette.background.default}` }}>
+      <Container maxWidth="lg">
+        <MotionBox {...enter(0)} sx={{ display: 'flex', alignItems: { xs: 'flex-start', md: 'center' }, flexDirection: { xs: 'column', md: 'row' }, gap: { xs: 3, md: 5 }, mb: { xs: 6, md: 9 } }}>
+          <ProfileAvatar />
+          <Box>
+            <Chip label="ABOUT ME" size="small" sx={{ mb: 1.75, bgcolor: `${theme.palette.primary.main}15`, color: 'primary.main', fontWeight: 800, letterSpacing: '0.1em', fontSize: '0.65rem' }} />
+            <Typography component="h1" sx={{ fontSize: { xs: '2.7rem', md: '4rem' }, lineHeight: 1, fontWeight: 800, letterSpacing: '-0.06em', mb: 1 }}>{personalInfo.name}</Typography>
+            <Stack direction="row" spacing={0.75} alignItems="center" color="text.secondary">
+              <LocationOn sx={{ fontSize: 18, color: 'primary.main' }} />
+              <Typography>{personalInfo.location}</Typography>
+              <Box sx={{ width: 4, height: 4, borderRadius: '50%', bgcolor: 'text.secondary', mx: 0.5 }} />
+              <Typography>持续学习中</Typography>
+            </Stack>
           </Box>
-        </Box>
+        </MotionBox>
 
-        <Divider sx={{ my: 6 }} />
+        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'minmax(0, 1.45fr) minmax(270px, 0.75fr)' }, gap: { xs: 3, md: 4 }, alignItems: 'start' }}>
+          <MotionBox {...enter(0.12)} sx={{ p: { xs: 3, md: 4.5 }, borderRadius: 4, bgcolor: 'background.paper', border: `1px solid ${theme.palette.primary.main}1C`, boxShadow: `0 20px 50px ${theme.palette.primary.main}0D` }}>
+            <Typography variant="overline" sx={{ color: 'primary.main', fontWeight: 800, letterSpacing: '0.14em' }}>01 / INTRODUCTION</Typography>
+            <Typography variant="h4" sx={{ mt: 1, mb: 2.5, fontWeight: 800, letterSpacing: '-0.035em' }}>你好，很高兴认识你。</Typography>
+            <Typography color="text.secondary" sx={{ whiteSpace: 'pre-line', lineHeight: 2, fontSize: { xs: '1rem', md: '1.06rem' } }}>{personalInfo.bio}</Typography>
+          </MotionBox>
 
-        <Box sx={{ mb: 8 }}>
-          <Typography variant="h5" sx={{ mb: 3, fontWeight: 600 }}>
-            关于我
-          </Typography>
-          <Typography
-            variant="body1"
-            color="text.secondary"
-            sx={{ lineHeight: 2, whiteSpace: 'pre-line' }}
-          >
-            {personalInfo.bio}
-          </Typography>
-        </Box>
+          <Stack spacing={3}>
+            <MotionBox {...enter(0.22)} sx={{ p: 3.25, borderRadius: 4, bgcolor: `${theme.palette.primary.main}12`, border: `1px solid ${theme.palette.primary.main}22` }}>
+              <Typography variant="overline" sx={{ color: 'primary.main', fontWeight: 800, letterSpacing: '0.14em' }}>02 / INTERESTS</Typography>
+              <Typography variant="h6" sx={{ mt: 0.75, mb: 2.25, fontWeight: 800 }}>正在投入的方向</Typography>
+              <Stack direction="row" flexWrap="wrap" gap={1}>
+                {personalInfo.interests.map((interest) => <Chip key={interest} label={interest} sx={{ bgcolor: 'background.paper', color: 'text.primary', fontWeight: 700, boxShadow: `0 4px 12px ${theme.palette.primary.main}12` }} />)}
+                <Chip label="Automation" variant="outlined" sx={{ borderColor: `${theme.palette.primary.main}55`, color: 'primary.main', fontWeight: 700 }} />
+                <Chip label="Homelab" variant="outlined" sx={{ borderColor: `${theme.palette.primary.main}55`, color: 'primary.main', fontWeight: 700 }} />
+              </Stack>
+            </MotionBox>
 
-        <Box sx={{ mb: 8 }}>
-          <Typography variant="h5" sx={{ mb: 3, fontWeight: 600 }}>
-            在学的东西
-          </Typography>
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-            {personalInfo.interests.map((interest) => (
-              <Box
-                key={interest}
-                sx={{
-                  px: 2,
-                  py: 1,
-                  borderRadius: 2,
-                  backgroundColor: 'primary.container',
-                  color: 'primary.onContainer',
-                }}
-              >
-                {interest}
-              </Box>
-            ))}
-          </Box>
-        </Box>
-
-        <Divider sx={{ my: 6 }} />
-
-        <Box sx={{ textAlign: 'center', py: 4 }}>
-          <Typography variant="h6" sx={{ mb: 3 }}>
-            联系我
-          </Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, alignItems: 'center' }}>
-            <Typography variant="body1" color="text.primary">
-              邮箱: <Box component="a" href={`mailto:${personalInfo.email}`} sx={{ color: 'primary.main', textDecoration: 'none' }}>
-                {personalInfo.email}
-              </Box>
-            </Typography>
-            <Typography variant="body1" color="text.primary">
-              QQ: {personalInfo.qq}
-            </Typography>
-            <Typography variant="body1" color="text.primary">
-              GitHub: <Box component="a" href={personalInfo.github} target="_blank" sx={{ color: 'primary.main', textDecoration: 'none' }}>
-                {personalInfo.github}
-              </Box>
-            </Typography>
-            <Typography variant="body1" color="text.primary">
-              Telegram: <Box component="a" href={personalInfo.telegram} target="_blank" sx={{ color: 'primary.main', textDecoration: 'none' }}>
-                {personalInfo.telegram}
-              </Box>
-            </Typography>
-          </Box>
+            <MotionBox {...enter(0.32)} sx={{ p: 3.25, borderRadius: 4, bgcolor: 'background.paper', border: `1px solid ${theme.palette.primary.main}1C` }}>
+              <Typography variant="overline" sx={{ color: 'primary.main', fontWeight: 800, letterSpacing: '0.14em' }}>03 / CONTACT</Typography>
+              <Stack divider={<Divider flexItem sx={{ borderColor: `${theme.palette.primary.main}16` }} />} sx={{ mt: 1.25 }}>
+                {contacts.map((contact) => (
+                  <Stack key={contact.label} component="a" href={contact.href} target={contact.label === 'Email' ? undefined : '_blank'} rel="noreferrer" direction="row" alignItems="center" spacing={1.25} sx={{ py: 1.3, color: 'inherit', textDecoration: 'none', '&:hover': { '& .contact-arrow': { transform: 'translate(3px, -3px)', color: 'primary.main' } } }}>
+                    <Box sx={{ color: 'primary.main', display: 'grid', placeItems: 'center' }}>{contact.icon}</Box>
+                    <Box sx={{ minWidth: 0, flexGrow: 1 }}><Typography variant="caption" color="text.secondary">{contact.label}</Typography><Typography noWrap fontWeight={700}>{contact.value}</Typography></Box>
+                    <ArrowOutward className="contact-arrow" sx={{ color: 'text.secondary', fontSize: 18, transition: 'all 0.2s ease' }} />
+                  </Stack>
+                ))}
+              </Stack>
+            </MotionBox>
+          </Stack>
         </Box>
       </Container>
     </Box>

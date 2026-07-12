@@ -27,10 +27,12 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, featured = fa
         display: 'flex',
         flexDirection: 'column',
         transition: 'all 0.3s ease',
+        overflow: 'hidden',
         '&:hover': {
-          transform: 'translateY(-4px)',
-          boxShadow: 4,
+          transform: 'translateY(-8px)',
+          boxShadow: '0 18px 40px rgba(34, 35, 57, 0.15)',
           borderColor: 'primary.main',
+          '& .project-preview': { transform: 'translate(-50%, -50%) scale(1.08)' },
         },
       }}
     >
@@ -41,9 +43,20 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, featured = fa
           position: 'relative',
           backgroundColor: 'surface.containerHigh',
           backgroundImage: `linear-gradient(135deg, #6750A4 0%, #9C89B8 50%, #E0AAFF 100%)`,
+          overflow: 'hidden',
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            inset: '-70%',
+            background: 'linear-gradient(110deg, transparent 42%, rgba(255,255,255,0.32) 50%, transparent 58%)',
+            transform: 'translateX(-55%) rotate(8deg)',
+            transition: 'transform 0.7s ease',
+          },
+          '&:hover::before': { transform: 'translateX(55%) rotate(8deg)' },
         }}
       >
         <Box
+          className="project-preview"
           sx={{
             position: 'absolute',
             top: '50%',
@@ -54,6 +67,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, featured = fa
             borderRadius: 2,
             backgroundColor: 'rgba(255,255,255,0.1)',
             backdropFilter: 'blur(10px)',
+            transition: 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',

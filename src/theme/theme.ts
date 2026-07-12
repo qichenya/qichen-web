@@ -1,13 +1,10 @@
-import { createTheme, ThemeOptions } from '@mui/material/styles';
+import { alpha, createTheme, ThemeOptions } from '@mui/material/styles';
 
 const commonTheme: ThemeOptions = {
   typography: {
     fontFamily: '"Roboto", "Noto Sans SC", sans-serif',
     h1: {
-      fontWeight: 700,
-      fontSize: '3rem',
-      lineHeight: 1.3,
-      letterSpacing: '-0.01em',
+      fontWeight: 700, fontSize: '3.5rem', lineHeight: 1.12, letterSpacing: '-0.035em',
     },
     h2: {
       fontWeight: 600,
@@ -44,33 +41,38 @@ const commonTheme: ThemeOptions = {
     },
   },
   shape: {
-    borderRadius: 12,
+    // MUI multiplies numeric `sx.borderRadius` values by this token.
+    // Keeping it at 4 prevents ordinary layout Boxes from becoming pill-shaped.
+    borderRadius: 4,
   },
   components: {
     MuiButton: {
       styleOverrides: {
         root: {
-          textTransform: 'none',
-          fontWeight: 500,
-          borderRadius: 20,
-          padding: '10px 24px',
+          textTransform: 'none', fontWeight: 700, borderRadius: 999, padding: '10px 24px', letterSpacing: '0.01em',
         },
+        contained: ({ theme }) => ({ boxShadow: 'none', '&:hover': { boxShadow: `0 3px 8px ${alpha(theme.palette.primary.main, 0.28)}` } }),
+        outlined: ({ theme }) => ({ borderColor: alpha(theme.palette.primary.main, 0.45), '&:hover': { borderColor: theme.palette.primary.main, backgroundColor: alpha(theme.palette.primary.main, 0.08) } }),
       },
     },
     MuiCard: {
       styleOverrides: {
         root: {
-          borderRadius: 16,
+          borderRadius: 20, boxShadow: 'none',
         },
       },
     },
     MuiChip: {
       styleOverrides: {
         root: {
-          borderRadius: 8,
+          borderRadius: 8, fontWeight: 600,
         },
       },
     },
+    MuiIconButton: { styleOverrides: { root: ({ theme }) => ({ borderRadius: 14, '&:hover': { backgroundColor: alpha(theme.palette.primary.main, 0.1) } }) } },
+    MuiDialog: { styleOverrides: { paper: ({ theme }) => ({ borderRadius: 28, backgroundImage: 'none', backgroundColor: theme.palette.background.paper }) } },
+    MuiTextField: { defaultProps: { variant: 'outlined' }, styleOverrides: { root: ({ theme }) => ({ '& .MuiOutlinedInput-root': { borderRadius: 16, backgroundColor: alpha(theme.palette.primary.main, 0.04), '& fieldset': { borderColor: alpha(theme.palette.primary.main, 0.35) }, '&:hover fieldset': { borderColor: theme.palette.primary.main }, '&.Mui-focused fieldset': { borderWidth: 2 } } }) } },
+    MuiCssBaseline: { styleOverrides: { body: { minHeight: '100vh' }, '*': { scrollbarColor: 'rgba(90, 75, 145, .35) transparent' } } },
   },
 };
 
@@ -141,6 +143,8 @@ export const getRandomPalette = () => {
   const randomIndex = Math.floor(Math.random() * colorPalettes.length);
   return colorPalettes[randomIndex];
 };
+
+export const getDefaultPalette = () => colorPalettes[0];
 
 export const createLightTheme = (palette: typeof colorPalettes[0]) => {
   return createTheme({

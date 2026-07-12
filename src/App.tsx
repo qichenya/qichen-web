@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider, CssBaseline, Box } from '@mui/material';
-import { createLightTheme, createDarkTheme, getRandomPalette } from './theme/theme';
+import { createLightTheme, createDarkTheme, getDefaultPalette } from './theme/theme';
 import { Layout } from './components/layout/Layout';
 import { AnimatedRoutes } from './components/AnimatedRoutes';
 
@@ -12,11 +12,7 @@ const App: React.FC = () => {
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
 
-  const [selectedPalette] = useState(() => {
-    const randomPalette = getRandomPalette();
-    localStorage.setItem('palette', JSON.stringify(randomPalette));
-    return randomPalette;
-  });
+  const [selectedPalette] = useState(getDefaultPalette);
 
   useEffect(() => {
     localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');

@@ -1,107 +1,25 @@
 import React, { useState } from 'react';
-import {
-  Box,
-  Container,
-  TextField,
-  Button,
-  Typography,
-  InputAdornment,
-  IconButton,
-} from '@mui/material';
-import { Search, ArrowBack } from '@mui/icons-material';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { Box, Button, Container, IconButton, InputAdornment, TextField, Typography } from '@mui/material';
+import { ArrowBack, Search } from '@mui/icons-material';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
-const searchEngineUrls: Record<string, string> = {
-  google: 'https://www.google.com/search?q=',
-  bing: 'https://www.bing.com/search?q=',
-  baidu: 'https://www.baidu.com/s?wd=',
-};
-
-const engineNames: Record<string, string> = {
-  google: 'Google',
-  bing: 'Bing',
-  baidu: '百度',
-};
+const searchEngineUrls: Record<string, string> = { google: 'https://www.google.com/search?q=', bing: 'https://www.bing.com/search?q=', baidu: 'https://www.baidu.com/s?wd=' };
+const engineNames: Record<string, string> = { google: 'Google', bing: 'Bing', baidu: '百度' };
 
 export const SearchPage: React.FC = () => {
-  const [searchParams] = useSearchParams();
+  const [params] = useSearchParams();
   const navigate = useNavigate();
   const [query, setQuery] = useState('');
-  const engine = searchParams.get('engine') || 'google';
+  const engine = params.get('engine') || 'google';
+  const search = () => { if (query.trim()) window.location.href = searchEngineUrls[engine] + encodeURIComponent(query); };
 
-  const handleSearch = () => {
-    if (query.trim()) {
-      window.location.href = searchEngineUrls[engine] + encodeURIComponent(query);
-    }
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      handleSearch();
-    }
-  };
-
-  return (
-    <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      <Box sx={{ px: 2, py: 1 }}>
-        <IconButton onClick={() => navigate('/')} sx={{ color: 'text.primary' }}>
-          <ArrowBack />
-        </IconButton>
-      </Box>
-
-      <Container maxWidth="sm" sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-        <Typography variant="h4" sx={{ textAlign: 'center', mb: 4, fontWeight: 600 }}>
-          搜索 - {engineNames[engine]}
-        </Typography>
-
-        <TextField
-          fullWidth
-          placeholder="输入搜索内容..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          onKeyPress={handleKeyPress}
-          autoFocus
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <Search />
-              </InputAdornment>
-            ),
-            sx: {
-              borderRadius: 4,
-              py: 1,
-              '& fieldset': {
-                borderColor: 'divider',
-              },
-              '&:hover fieldset': {
-                borderColor: 'primary.main',
-              },
-              '&.Mui-focused fieldset': {
-                borderColor: 'primary.main',
-                borderWidth: 2,
-              },
-            },
-          }}
-          sx={{ mb: 4 }}
-        />
-
-        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
-          <Button
-            variant="contained"
-            size="large"
-            onClick={handleSearch}
-            startIcon={<Search />}
-            disabled={!query.trim()}
-            sx={{
-              px: 4,
-              py: 1.5,
-              borderRadius: 4,
-            }}
-          >
-            搜索
-          </Button>
-        </Box>
-      </Container>
-    </Box>
-  );
+  return <Box sx={{ minHeight: '100vh', pt: 10 }}>
+    <Box sx={{ px: 2, py: 2 }}><IconButton onClick={() => navigate('/')} aria-label="返回首页" sx={{ bgcolor: 'primary.container', color: 'primary.onContainer' }}><ArrowBack /></IconButton></Box>
+    <Container maxWidth="sm" sx={{ minHeight: '70vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', pb: 10 }}>
+      <Typography variant="h3" sx={{ textAlign: 'center', mb: 1.25, fontWeight: 800 }}>搜索 {engineNames[engine]}</Typography>
+      <Typography color="text.secondary" sx={{ textAlign: 'center', mb: 4 }}>输入关键词，开始探索。</Typography>
+      <TextField fullWidth autoFocus placeholder="输入搜索内容…" value={query} onChange={(event) => setQuery(event.target.value)} onKeyDown={(event) => { if (event.key === 'Enter') search(); }} InputProps={{ startAdornment: <InputAdornment position="start"><Search /></InputAdornment> }} />
+      <Button variant="contained" size="large" onClick={search} disabled={!query.trim()} startIcon={<Search />} sx={{ mt: 2, alignSelf: 'center' }}>搜索</Button>
+    </Container>
+  </Box>;
 };

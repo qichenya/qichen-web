@@ -9,14 +9,25 @@ html {
 }
 
 body {
-  font-family: 'Roboto', 'Noto Sans SC', sans-serif;
+  font-family: 'Roboto', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  background: #F8F7FF;
+}
+
+/* Keep the interface comfortable for visitors who prefer less movement. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 ::selection {
-  background-color: rgba(103, 80, 164, 0.3);
+  background-color: rgba(123, 110, 219, 0.28);
 }
 
 ::-webkit-scrollbar {
@@ -29,7 +40,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(103, 80, 164, 0.3);
+  background-color: rgba(123, 110, 219, 0.3);
   border-radius: 4px;
 }
 

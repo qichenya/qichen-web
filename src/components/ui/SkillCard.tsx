@@ -48,6 +48,7 @@ export const SkillCard: React.FC<SkillCardProps> = ({ skill }) => {
           transform: 'translateY(-4px)',
           boxShadow: '0 8px 24px rgba(0,0,0,0.08)',
           borderColor: 'primary.main',
+          '& .skill-icon': { transform: 'rotate(-8deg) scale(1.08)' },
         },
       }}
     >
@@ -62,6 +63,7 @@ export const SkillCard: React.FC<SkillCardProps> = ({ skill }) => {
           }}
         >
           <Box
+            className="skill-icon"
             sx={{
               width: 64,
               height: 64,
@@ -71,6 +73,7 @@ export const SkillCard: React.FC<SkillCardProps> = ({ skill }) => {
               justifyContent: 'center',
               backgroundColor: 'primary.container',
               color: 'primary.main',
+              transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
             }}
           >
             {iconMap[skill.icon] || <Code sx={{ fontSize: 32 }} />}
