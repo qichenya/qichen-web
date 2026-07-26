@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { Avatar, Box, Chip, CircularProgress, Container, Divider, Stack, Typography, useTheme } from '@mui/material';
 import { AlternateEmail, ArrowOutward, GitHub, LocationOn, Telegram } from '@mui/icons-material';
-import { motion, useReducedMotion } from 'framer-motion';
 import { personalInfo } from '../data/personalInfo';
-
-const MotionBox = motion(Box);
+import { useGsapReveal } from '../hooks/useGsapAnimations';
 
 const ProfileAvatar: React.FC = () => {
   const [loaded, setLoaded] = useState(false);
@@ -32,12 +30,7 @@ const ProfileAvatar: React.FC = () => {
 
 export const AboutPage: React.FC = () => {
   const theme = useTheme();
-  const reduceMotion = useReducedMotion();
-  const enter = (delay: number) => ({
-    initial: reduceMotion ? false : { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.55, delay },
-  });
+  const containerRef = useGsapReveal<HTMLDivElement>();
 
   const contacts = [
     { label: 'Email', value: personalInfo.email, href: `mailto:${personalInfo.email}`, icon: <AlternateEmail /> },
@@ -46,9 +39,9 @@ export const AboutPage: React.FC = () => {
   ];
 
   return (
-    <Box sx={{ minHeight: '100vh', py: { xs: 11, md: 14 }, overflow: 'hidden', bgcolor: 'background.default' }}>
+    <Box ref={containerRef} sx={{ minHeight: '100vh', py: { xs: 11, md: 14 }, overflow: 'hidden', bgcolor: 'background.default' }}>
       <Container maxWidth="lg">
-        <MotionBox {...enter(0)} sx={{ display: 'flex', alignItems: { xs: 'flex-start', md: 'center' }, flexDirection: { xs: 'column', md: 'row' }, gap: { xs: 3, md: 5 }, mb: { xs: 6, md: 9 } }}>
+        <Box data-gsap-reveal sx={{ display: 'flex', alignItems: { xs: 'flex-start', md: 'center' }, flexDirection: { xs: 'column', md: 'row' }, gap: { xs: 3, md: 5 }, mb: { xs: 6, md: 9 } }}>
           <ProfileAvatar />
           <Box>
             <Chip label="ABOUT ME" size="small" sx={{ mb: 1.75, bgcolor: `${theme.palette.primary.main}15`, color: 'primary.main', fontWeight: 800, letterSpacing: '0.1em', fontSize: '0.65rem' }} />
@@ -60,17 +53,17 @@ export const AboutPage: React.FC = () => {
               <Typography>持续学习中</Typography>
             </Stack>
           </Box>
-        </MotionBox>
+        </Box>
 
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'minmax(0, 1.45fr) minmax(270px, 0.75fr)' }, gap: { xs: 3, md: 4 }, alignItems: 'start' }}>
-          <MotionBox {...enter(0.12)} sx={{ p: { xs: 3, md: 4.5 }, borderRadius: 4, bgcolor: 'background.paper', border: `1px solid ${theme.palette.primary.main}1C`, boxShadow: `0 20px 50px ${theme.palette.primary.main}0D` }}>
+          <Box data-gsap-reveal data-gsap-delay="0.1" sx={{ p: { xs: 3, md: 4.5 }, borderRadius: 4, bgcolor: 'background.paper', border: `1px solid ${theme.palette.primary.main}1C`, boxShadow: `0 20px 50px ${theme.palette.primary.main}0D` }}>
             <Typography variant="overline" sx={{ color: 'primary.main', fontWeight: 800, letterSpacing: '0.14em' }}>01 / INTRODUCTION</Typography>
             <Typography variant="h4" sx={{ mt: 1, mb: 2.5, fontWeight: 800, letterSpacing: '-0.035em' }}>你好，很高兴认识你。</Typography>
             <Typography color="text.secondary" sx={{ whiteSpace: 'pre-line', lineHeight: 2, fontSize: { xs: '1rem', md: '1.06rem' } }}>{personalInfo.bio}</Typography>
-          </MotionBox>
+          </Box>
 
           <Stack spacing={3}>
-            <MotionBox {...enter(0.22)} sx={{ p: 3.25, borderRadius: 4, bgcolor: `${theme.palette.primary.main}12`, border: `1px solid ${theme.palette.primary.main}22` }}>
+            <Box data-gsap-reveal data-gsap-delay="0.2" sx={{ p: 3.25, borderRadius: 4, bgcolor: `${theme.palette.primary.main}12`, border: `1px solid ${theme.palette.primary.main}22` }}>
               <Typography variant="overline" sx={{ color: 'primary.main', fontWeight: 800, letterSpacing: '0.14em' }}>02 / INTERESTS</Typography>
               <Typography variant="h6" sx={{ mt: 0.75, mb: 2.25, fontWeight: 800 }}>正在投入的方向</Typography>
               <Stack direction="row" flexWrap="wrap" gap={1}>
@@ -78,9 +71,9 @@ export const AboutPage: React.FC = () => {
                 <Chip label="Automation" variant="outlined" sx={{ borderColor: `${theme.palette.primary.main}55`, color: 'primary.main', fontWeight: 700 }} />
                 <Chip label="Homelab" variant="outlined" sx={{ borderColor: `${theme.palette.primary.main}55`, color: 'primary.main', fontWeight: 700 }} />
               </Stack>
-            </MotionBox>
+            </Box>
 
-            <MotionBox {...enter(0.32)} sx={{ p: 3.25, borderRadius: 4, bgcolor: 'background.paper', border: `1px solid ${theme.palette.primary.main}1C` }}>
+            <Box data-gsap-reveal data-gsap-delay="0.3" sx={{ p: 3.25, borderRadius: 4, bgcolor: 'background.paper', border: `1px solid ${theme.palette.primary.main}1C` }}>
               <Typography variant="overline" sx={{ color: 'primary.main', fontWeight: 800, letterSpacing: '0.14em' }}>03 / CONTACT</Typography>
               <Stack divider={<Divider flexItem sx={{ borderColor: `${theme.palette.primary.main}16` }} />} sx={{ mt: 1.25 }}>
                 {contacts.map((contact) => (
@@ -91,7 +84,7 @@ export const AboutPage: React.FC = () => {
                   </Stack>
                 ))}
               </Stack>
-            </MotionBox>
+            </Box>
           </Stack>
         </Box>
       </Container>

@@ -1,26 +1,42 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Avatar, Box, Container, Stack, Typography, useTheme } from '@mui/material';
 import { ArrowOutward, Link as LinkIcon } from '@mui/icons-material';
-import { motion, useReducedMotion } from 'framer-motion';
 import { friendLinks } from '../data/friendLinks';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-const MotionBox = motion(Box);
+gsap.registerPlugin(ScrollTrigger);
 
 const getInitial = (name: string) => name.trim().charAt(0).toUpperCase();
 
 export const LinksPage: React.FC = () => {
   const theme = useTheme();
-  const reduceMotion = useReducedMotion();
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const scope = containerRef.current;
+    if (!scope) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) return;
+
+    const ctx = gsap.context(() => {
+      // 标题区入场
+      gsap.fromTo('[data-links="header"]', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' });
+      // 卡片交错入场
+      gsap.fromTo('[data-links="card"]', { opacity: 0, y: 50, scale: 0.96 }, {
+        opacity: 1, y: 0, scale: 1, duration: 0.6, stagger: 0.1, ease: 'power3.out',
+        scrollTrigger: { trigger: '[data-links="grid"]', start: 'top 80%' },
+      });
+    }, scope);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <Box sx={{ minHeight: '100vh', py: { xs: 11, md: 14 }, overflow: 'hidden', bgcolor: 'background.default' }}>
+    <Box ref={containerRef} sx={{ minHeight: '100vh', py: { xs: 11, md: 14 }, overflow: 'hidden', bgcolor: 'background.default' }}>
       <Container maxWidth="lg">
-        <MotionBox
-          initial={reduceMotion ? false : { opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55 }}
-          sx={{ maxWidth: 690, mb: { xs: 6, md: 8 } }}
-        >
+        <Box data-links="header" sx={{ maxWidth: 690, mb: { xs: 6, md: 8 } }}>
           <Stack direction="row" spacing={1} alignItems="center" sx={{ color: 'primary.main', mb: 2 }}>
             <LinkIcon sx={{ fontSize: 20 }} />
             <Typography variant="overline" sx={{ fontWeight: 800, letterSpacing: '0.16em' }}>FRIEND LINKS</Typography>
@@ -31,17 +47,11 @@ export const LinksPage: React.FC = () => {
           <Typography color="text.secondary" sx={{ fontSize: { xs: '1rem', md: '1.12rem' }, lineHeight: 1.8, maxWidth: 460 }}>
             这里收藏了一些朋友的个人空间。点击卡片，去看看他们正在创造什么。
           </Typography>
-        </MotionBox>
+        </Box>
 
-        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, minmax(0, 1fr))', lg: 'repeat(3, minmax(0, 1fr))' }, gap: 2.25 }}>
-          {friendLinks.map((link, index) => (
-            <motion.div
-              key={link.name}
-              initial={reduceMotion ? false : { opacity: 0, y: 22 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.12 + index * 0.09 }}
-              style={{ height: '100%' }}
-            >
+        <Box data-links="grid" sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, minmax(0, 1fr))', lg: 'repeat(3, minmax(0, 1fr))' }, gap: 2.25 }}>
+          {friendLinks.map((link) => (
+            <Box key={link.name} data-links="card" sx={{ height: '100%' }}>
               <Box
               component="a"
               href={link.url}
@@ -64,18 +74,13 @@ export const LinksPage: React.FC = () => {
                 <Typography variant="caption" sx={{ display: 'block', color: 'primary.main', fontWeight: 700, mt: 1.5 }}>{new URL(link.url).hostname}</Typography>
               </Box>
               </Box>
-            </motion.div>
+            </Box>
           ))}
 
-          <MotionBox
-            initial={reduceMotion ? false : { opacity: 0, y: 22 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.12 + friendLinks.length * 0.09 }}
-            sx={{ minHeight: 215, p: 3, borderRadius: 4, border: `1px dashed ${theme.palette.primary.main}65`, display: 'flex', flexDirection: 'column', justifyContent: 'center', bgcolor: `${theme.palette.primary.main}08` }}
-          >
+          <Box data-links="card" sx={{ minHeight: 215, p: 3, borderRadius: 4, border: `1px dashed ${theme.palette.primary.main}65`, display: 'flex', flexDirection: 'column', justifyContent: 'center', bgcolor: `${theme.palette.primary.main}08` }}>
             <Typography variant="h6" sx={{ fontWeight: 800, mb: 1 }}>想交换友链？</Typography>
             <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.7 }}>欢迎通过关于页的联系方式找到我，一起把这片互联网的小角落连接起来。</Typography>
-          </MotionBox>
+          </Box>
         </Box>
       </Container>
     </Box>
