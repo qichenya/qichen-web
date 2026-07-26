@@ -1,8 +1,5 @@
 export interface Skill {
   name: string;
-  icon: string;
-  category: 'system' | 'vcs' | 'tools';
-  proficiency: number;
 }
 
 export const skills: Skill[] = [
