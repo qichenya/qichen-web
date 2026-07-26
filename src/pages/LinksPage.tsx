@@ -21,9 +21,7 @@ export const LinksPage: React.FC = () => {
     if (reduceMotion) return;
 
     const ctx = gsap.context(() => {
-      // 标题区入场
       gsap.fromTo('[data-links="header"]', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' });
-      // 卡片交错入场
       gsap.fromTo('[data-links="card"]', { opacity: 0, y: 50, scale: 0.96 }, {
         opacity: 1, y: 0, scale: 1, duration: 0.6, stagger: 0.1, ease: 'power3.out',
         scrollTrigger: { trigger: '[data-links="grid"]', start: 'top 80%' },

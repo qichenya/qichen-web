@@ -1,46 +1,44 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useLocation, Routes, Route } from 'react-router-dom';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import gsap from 'gsap';
 import { HomePage } from '../pages/HomePage';
 import { AboutPage } from '../pages/AboutPage';
 import { LinksPage } from '../pages/LinksPage';
 import { SearchPage } from '../pages/SearchPage';
 
-const pageVariants = {
-  initial: {
-    opacity: 0,
-    y: 20,
-  },
-  in: {
-    opacity: 1,
-    y: 0,
-  },
-  out: {
-    opacity: 0,
-    y: -20,
-  },
-};
-
 export const AnimatedRoutes: React.FC = () => {
   const location = useLocation();
-  const shouldReduceMotion = useReducedMotion();
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const element = containerRef.current;
+
+    gsap.fromTo(
+      element,
+      { opacity: 0, y: 20 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: 'power2.out',
+      }
+    );
+
+    return () => {
+      gsap.killTweensOf(element);
+    };
+  }, [location.pathname]);
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        key={location.pathname}
-        initial={shouldReduceMotion ? false : 'initial'}
-        animate="in"
-        exit={shouldReduceMotion ? undefined : 'out'}
-        variants={pageVariants}
-      >
-        <Routes location={location}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/links" element={<LinksPage />} />
-          <Route path="/search" element={<SearchPage />} />
-        </Routes>
-      </motion.div>
-    </AnimatePresence>
+    <div ref={containerRef}>
+      <Routes location={location}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/links" element={<LinksPage />} />
+        <Route path="/search" element={<SearchPage />} />
+      </Routes>
+    </div>
   );
 };

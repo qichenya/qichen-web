@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Box,
   Container,
@@ -8,9 +8,33 @@ import {
 } from '@mui/material';
 import { GitHub, FolderOpen } from '@mui/icons-material';
 import { projects } from '../data/projects';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const ProjectsPage: React.FC = () => {
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const scope = containerRef.current;
+    if (!scope) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) return;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo('[data-projects="header"]', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
+      gsap.fromTo('[data-projects="tags"]', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, delay: 0.2, ease: 'power2.out' });
+      gsap.fromTo('[data-projects="card"]', { opacity: 0, y: 40, scale: 0.95 }, {
+        opacity: 1, y: 0, scale: 1, duration: 0.5, stagger: 0.1, ease: 'power2.out',
+        scrollTrigger: { trigger: '[data-projects="grid"]', start: 'top 85%' },
+      });
+    }, scope);
+
+    return () => ctx.revert();
+  }, []);
 
   const allTags = Array.from(new Set(projects.flatMap((p) => p.tags)));
 
@@ -19,9 +43,9 @@ export const ProjectsPage: React.FC = () => {
     : projects;
 
   return (
-    <Box>
+    <Box ref={containerRef} sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
       <Container maxWidth="lg" sx={{ py: { xs: 8, md: 12 } }}>
-        <Box sx={{ mb: 2 }}>
+        <Box data-projects="header" sx={{ mb: 2 }}>
           <Typography
             variant="h3"
             sx={{
@@ -39,7 +63,7 @@ export const ProjectsPage: React.FC = () => {
           </Typography>
         </Box>
 
-        <Box sx={{ mb: 6 }}>
+        <Box data-projects="tags" sx={{ mb: 6 }}>
           <Typography variant="body2" color="onSurfaceVariant" sx={{ mb: 2 }}>
             标签筛选：
           </Typography>
@@ -65,10 +89,11 @@ export const ProjectsPage: React.FC = () => {
           </Box>
         </Box>
 
-        <Grid container spacing={3}>
+        <Grid data-projects="grid" container spacing={3}>
           {filteredProjects.map((project) => (
             <Grid item xs={12} sm={6} lg={4} key={project.id}>
               <Box
+                data-projects="card"
                 sx={{
                   height: '100%',
                   display: 'flex',

@@ -14,4 +14,9 @@ export const personalInfo = {
 
 目前主要在学习 Linux、容器化和自动化运维，希望以后能成为一个合格的运维工程师。`,
   interests: ['Linux Shell'],
+  focusDirections: [
+    { name: 'Linux Shell', outlined: false },
+    { name: '自动化', outlined: true },
+    { name: '嵌入式', outlined: true },
+  ],
 };

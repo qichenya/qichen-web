@@ -3,43 +3,85 @@ import { Avatar, Box, Button, Chip, Container, Stack, Typography, useTheme } fro
 import { ArrowOutward, AutoAwesome, GitHub } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { personalInfo } from '../data/personalInfo';
-import { useMagnetic, useGsapParallax } from '../hooks/useGsapAnimations';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const HomePage: React.FC = () => {
   const theme = useTheme();
   const heroRef = useRef<HTMLDivElement>(null);
-  const magneticRef = useMagnetic<HTMLAnchorElement>();
-  const blobRef = useGsapParallax<HTMLDivElement>(120);
+  const magneticRef = useRef<HTMLAnchorElement>(null);
+  const blobRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduceMotion || !heroRef.current) return;
+    if (reduceMotion) return;
 
     const ctx = gsap.context(() => {
-      // Chip 标签淡入
       gsap.fromTo('[data-hero="chip"]', { opacity: 0, y: -16 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
-      // 头像信息行
       gsap.fromTo('[data-hero="status"]', { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.6, delay: 0.15, ease: 'power2.out' });
-      // 主标题逐字揭示
       gsap.fromTo('[data-hero="title"] .char', { opacity: 0, y: 80, rotateX: -90 }, { opacity: 1, y: 0, rotateX: 0, duration: 0.7, delay: 0.3, stagger: 0.045, ease: 'back.out(1.5)' });
-      // 副标题
       gsap.fromTo('[data-hero="subtitle"]', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, delay: 0.9, ease: 'power2.out' });
-      // 按钮组
       gsap.fromTo('[data-hero="cta"] > *', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, delay: 1.05, stagger: 0.12, ease: 'power2.out' });
+
+      gsap.to(blobRef.current, {
+        x: 'random(-30, 30)',
+        y: 'random(-30, 30)',
+        duration: 'random(8, 12)',
+        repeat: -1,
+        ease: 'sine.inOut',
+        yoyo: true,
+      });
     }, heroRef);
 
     return () => ctx.revert();
   }, []);
 
-  // 将标题文字拆分为单字 span（用于 GSAP 逐字动画）
+  useEffect(() => {
+    const button = magneticRef.current;
+    if (!button) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = button.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+
+      gsap.to(button, {
+        x: x * 0.3,
+        y: y * 0.3,
+        scale: 1.05,
+        duration: 0.4,
+        ease: 'power2.out',
+      });
+    };
+
+    const handleMouseLeave = () => {
+      gsap.to(button, {
+        x: 0,
+        y: 0,
+        scale: 1,
+        duration: 0.5,
+        ease: 'elastic.out(1, 0.4)',
+      });
+    };
+
+    button.addEventListener('mousemove', handleMouseMove);
+    button.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      button.removeEventListener('mousemove', handleMouseMove);
+      button.removeEventListener('mouseleave', handleMouseLeave);
+      gsap.killTweensOf(button);
+    };
+  }, []);
+
   const splitChars = (text: string) =>
     text.split('').map((ch, i) => (
       <Box component="span" key={i} className="char" sx={{ display: 'inline-block' }}>{ch === ' ' ? '\u00A0' : ch}</Box>
     ));
 
   return <Box sx={{ overflow: 'hidden', position: 'relative', bgcolor: 'background.default' }}>
-    {/* 视差装饰光斑 */}
     <Box ref={blobRef} sx={{ position: 'absolute', width: 420, height: 420, borderRadius: '50%', top: -80, right: -100, bgcolor: `${theme.palette.primary.main}0A`, filter: 'blur(60px)', pointerEvents: 'none', zIndex: 0 }} />
     <Box component="section" ref={heroRef} sx={{
       minHeight: '100vh', display: 'flex', alignItems: 'center', pt: { xs: 11, md: 8 }, pb: { xs: 7, md: 5 }, bgcolor: 'background.default', position: 'relative', zIndex: 1,

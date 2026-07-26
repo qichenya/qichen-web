@@ -7,21 +7,21 @@ export interface Skill {
 
 export const skills: Skill[] = [
   {
-    name: 'Linux',
-    icon: 'Terminal',
-    category: 'system',
-    proficiency: 75,
+    name: 'Linux运维',
   },
   {
-    name: 'Docker',
-    icon: 'Dns',
-    category: 'tools',
-    proficiency: 60,
+    name: 'Windows运维',
   },
   {
-    name: 'Git',
-    icon: 'GitHub',
-    category: 'vcs',
-    proficiency: 70,
+    name: 'Git的使用',
+  },
+  {
+    name: 'Openclaw的使用',
+  },
+  {
+    name: 'skill的使用',
+  },
+  {
+    name: 'Frp的使用',
   },
 ];
