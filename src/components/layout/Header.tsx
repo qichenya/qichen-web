@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { AppBar, Box, IconButton, Stack, Toolbar, Typography, alpha, useMediaQuery, useTheme } from '@mui/material';
-import { DarkMode, LightMode, Menu as MenuIcon, Close as CloseIcon } from '@mui/icons-material';
+import { DarkMode, LightMode, Menu as MenuIcon, Close as CloseIcon, OpenInNew } from '@mui/icons-material';
 import { Link, useLocation } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -8,8 +8,14 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 interface HeaderProps { toggleTheme: () => void; isDarkMode: boolean; }
+interface NavItem { label: string; path?: string; href?: string; }
 
-const navItems = [{ label: '首页', path: '/' }, { label: '关于', path: '/about' }, { label: '友链', path: '/links' }];
+const navItems: NavItem[] = [
+  { label: '首页', path: '/' },
+  { label: '博客', href: 'https://wiki.qichen.ink' },
+  { label: '关于', path: '/about' },
+  { label: '友链', path: '/links' },
+];
 
 export const Header: React.FC<HeaderProps> = ({ toggleTheme, isDarkMode }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -63,14 +69,22 @@ export const Header: React.FC<HeaderProps> = ({ toggleTheme, isDarkMode }) => {
     }
   };
 
-  const navLink = (item: typeof navItems[number]) => {
-    const selected = location.pathname === item.path;
+  const navLink = (item: NavItem) => {
+    const selected = item.path ? location.pathname === item.path : false;
+    const isExternal = !!item.href;
+
     return (
       <Box
-        key={item.path}
-        component={Link}
-        to={item.path}
+        key={item.path || item.label}
+        component={isExternal ? 'a' : Link}
+        href={isExternal ? item.href : undefined}
+        to={isExternal ? undefined : item.path}
+        target={isExternal ? '_blank' : undefined}
+        rel={isExternal ? 'noopener noreferrer' : undefined}
         sx={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 0.4,
           textDecoration: 'none',
           color: selected ? 'primary.onContainer' : 'text.primary',
           bgcolor: selected ? 'primary.container' : 'transparent',
@@ -83,12 +97,14 @@ export const Header: React.FC<HeaderProps> = ({ toggleTheme, isDarkMode }) => {
         }}
       >
         {item.label}
+        {isExternal && <OpenInNew sx={{ fontSize: 13, opacity: 0.5 }} />}
       </Box>
     );
   };
 
-  const mobileNavLink = (item: typeof navItems[number], index: number) => {
-    const selected = location.pathname === item.path;
+  const mobileNavLink = (item: NavItem, index: number) => {
+    const selected = item.path ? location.pathname === item.path : false;
+    const isExternal = !!item.href;
     const linkRef = useRef<HTMLAnchorElement>(null);
 
     useEffect(() => {
@@ -109,13 +125,18 @@ export const Header: React.FC<HeaderProps> = ({ toggleTheme, isDarkMode }) => {
 
     return (
       <Box
-        key={item.path}
+        key={item.path || item.label}
         ref={linkRef}
-        component={Link}
-        to={item.path}
+        component={isExternal ? 'a' : Link}
+        href={isExternal ? item.href : undefined}
+        to={isExternal ? undefined : item.path}
+        target={isExternal ? '_blank' : undefined}
+        rel={isExternal ? 'noopener noreferrer' : undefined}
         onClick={closeMenu}
         sx={{
-          display: 'block',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 0.5,
           textDecoration: 'none',
           color: selected ? 'primary.main' : 'text.primary',
           fontWeight: selected ? 600 : 500,
@@ -129,12 +150,13 @@ export const Header: React.FC<HeaderProps> = ({ toggleTheme, isDarkMode }) => {
             color: 'primary.main',
             paddingLeft: 2,
           },
-          '&:last-child': {
+          '&:last-of-type': {
             borderBottom: 'none',
           },
         }}
       >
         {item.label}
+        {isExternal && <OpenInNew sx={{ fontSize: 14, color: 'text.secondary' }} />}
       </Box>
     );
   };
