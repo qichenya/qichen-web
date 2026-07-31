@@ -12,7 +12,7 @@ interface NavItem { label: string; path?: string; href?: string; }
 
 const navItems: NavItem[] = [
   { label: '首页', path: '/' },
-  { label: '博客', href: 'https://wiki.qichen.ink' },
+  { label: '博客', path: '/wiki-redirect' },
   { label: '关于', path: '/about' },
   { label: '友链', path: '/links' },
 ];

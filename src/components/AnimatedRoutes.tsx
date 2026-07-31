@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+﻿import React, { useEffect, useRef } from 'react';
 import { useLocation, Routes, Route } from 'react-router-dom';
 import gsap from 'gsap';
 import { HomePage } from '../pages/HomePage';
 import { AboutPage } from '../pages/AboutPage';
 import { LinksPage } from '../pages/LinksPage';
 import { SearchPage } from '../pages/SearchPage';
+import { WikiRedirect } from '../pages/WikiRedirect';
 
 export const AnimatedRoutes: React.FC = () => {
   const location = useLocation();
@@ -38,6 +39,7 @@ export const AnimatedRoutes: React.FC = () => {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/links" element={<LinksPage />} />
         <Route path="/search" element={<SearchPage />} />
+        <Route path="/wiki-redirect" element={<WikiRedirect />} />
       </Routes>
     </div>
   );
