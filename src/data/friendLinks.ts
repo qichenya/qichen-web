@@ -19,4 +19,9 @@ export const friendLinks: FriendLink[] = [
     url: 'https://www.roysgensokyo.space',
     description: '欢迎来到我的小天地，在这里追寻我们的故事',
   },
+  {
+    name: 'Lufu_Enter',
+    url: 'https://www.lufusblog.top',
+    description: '爱摸鱼的幻想家',
+  }
 ];
