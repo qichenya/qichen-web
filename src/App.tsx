@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider, CssBaseline, Box } from '@mui/material';
-import { createLightTheme, createDarkTheme, getDefaultPalette } from './theme/theme';
+import { createLightTheme, createDarkTheme } from './theme/theme';
 import { Layout } from './components/layout/Layout';
 import { AnimatedRoutes } from './components/AnimatedRoutes';
 
@@ -9,10 +9,8 @@ const App: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const saved = localStorage.getItem('theme');
     if (saved) return saved === 'dark';
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return true;
   });
-
-  const [selectedPalette] = useState(getDefaultPalette);
 
   useEffect(() => {
     localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
@@ -23,15 +21,15 @@ const App: React.FC = () => {
   };
 
   const theme = useMemo(() => {
-    return isDarkMode ? createDarkTheme(selectedPalette) : createLightTheme(selectedPalette);
-  }, [isDarkMode, selectedPalette]);
+    return isDarkMode ? createDarkTheme() : createLightTheme();
+  }, [isDarkMode]);
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Box
         sx={{
-          transition: 'background-color 0.5s ease, color 0.5s ease',
+          transition: 'background-color 0.4s ease, color 0.4s ease',
           minHeight: '100vh',
           bgcolor: 'background.default',
         }}

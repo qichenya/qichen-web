@@ -1,35 +1,36 @@
 import { alpha, createTheme, ThemeOptions } from '@mui/material/styles';
 
+/* ------------------------------------------------------------
+   QICHEN — Nothing style tokens
+   Pure black, dot-matrix display type, mono labels, single red.
+   ------------------------------------------------------------ */
+
+export const FONT_DOTS = '"Doto", "JetBrains Mono", "Noto Sans SC", monospace';
+export const FONT_MONO = '"JetBrains Mono", ui-monospace, SFMono-Regular, "Noto Sans SC", monospace';
+export const FONT_TEXT = '"Noto Sans SC", system-ui, -apple-system, sans-serif';
+
+export const PAGE_MAX_WIDTH = 625;
+
 const commonTheme: ThemeOptions = {
   typography: {
-    fontFamily: '"Roboto", "Noto Sans SC", sans-serif',
+    fontFamily: FONT_TEXT,
     h1: {
-      fontWeight: 700, fontSize: '3.5rem', lineHeight: 1.12, letterSpacing: '-0.035em',
+      fontFamily: FONT_DOTS, fontWeight: 900, fontSize: '4.25rem', lineHeight: 0.95, letterSpacing: '2px',
     },
     h2: {
-      fontWeight: 600,
-      fontSize: '2.25rem',
-      lineHeight: 1.4,
+      fontFamily: FONT_DOTS, fontWeight: 900, fontSize: '3.25rem', lineHeight: 1, letterSpacing: '2px',
     },
     h3: {
-      fontWeight: 600,
-      fontSize: '1.75rem',
-      lineHeight: 1.4,
+      fontFamily: FONT_DOTS, fontWeight: 900, fontSize: '2.5rem', lineHeight: 1, letterSpacing: '1.5px',
     },
     h4: {
-      fontWeight: 600,
-      fontSize: '1.5rem',
-      lineHeight: 1.4,
+      fontFamily: FONT_DOTS, fontWeight: 900, fontSize: '2rem', lineHeight: 1, letterSpacing: '1.5px',
     },
     h5: {
-      fontWeight: 500,
-      fontSize: '1.25rem',
-      lineHeight: 1.5,
+      fontFamily: FONT_MONO, fontWeight: 500, fontSize: '1rem', lineHeight: 1.5, letterSpacing: '0.06em',
     },
     h6: {
-      fontWeight: 500,
-      fontSize: '1rem',
-      lineHeight: 1.5,
+      fontFamily: FONT_MONO, fontWeight: 500, fontSize: '0.9rem', lineHeight: 1.5, letterSpacing: '0.04em',
     },
     body1: {
       fontSize: '1rem',
@@ -37,202 +38,192 @@ const commonTheme: ThemeOptions = {
     },
     body2: {
       fontSize: '0.875rem',
-      lineHeight: 1.7,
+      lineHeight: 1.75,
+    },
+    caption: {
+      fontFamily: FONT_MONO,
+      fontSize: '0.72rem',
+      letterSpacing: '0.08em',
+      lineHeight: 1.6,
+    },
+    overline: {
+      fontFamily: FONT_MONO,
+      fontSize: '0.65rem',
+      fontWeight: 400,
+      letterSpacing: '0.16em',
+      lineHeight: 1.6,
+      textTransform: 'uppercase',
+    },
+    button: {
+      fontFamily: FONT_MONO,
+      fontWeight: 400,
+      fontSize: '0.875rem',
+      letterSpacing: '0.06em',
+      textTransform: 'none',
     },
   },
   shape: {
-    // MUI multiplies numeric `sx.borderRadius` values by this token.
-    // Keeping it at 4 prevents ordinary layout Boxes from becoming pill-shaped.
-    borderRadius: 4,
+    borderRadius: 2,
   },
   components: {
     MuiButton: {
+      defaultProps: { disableElevation: true },
       styleOverrides: {
         root: {
-          textTransform: 'none', fontWeight: 700, borderRadius: 999, padding: '10px 24px', letterSpacing: '0.01em',
+          borderRadius: 2,
+          height: 48,
+          padding: '0 20px',
+          fontFamily: FONT_MONO,
+          fontSize: '0.875rem',
+          fontWeight: 400,
+          letterSpacing: '0.06em',
+          boxShadow: 'none',
+          transition: 'opacity .15s ease, background-color .15s ease, border-color .15s ease',
+          '& .MuiButton-startIcon svg, & .MuiButton-endIcon svg': { fontSize: 16 },
+          '&:hover': { boxShadow: 'none', opacity: 0.82 },
         },
-        contained: ({ theme }) => ({ boxShadow: 'none', '&:hover': { boxShadow: `0 3px 8px ${alpha(theme.palette.primary.main, 0.28)}` } }),
-        outlined: ({ theme }) => ({ borderColor: alpha(theme.palette.primary.main, 0.45), '&:hover': { borderColor: theme.palette.primary.main, backgroundColor: alpha(theme.palette.primary.main, 0.08) } }),
+        contained: {
+          backgroundColor: '#D71921',
+          color: '#FFFFFF',
+          '&:hover': { backgroundColor: '#D71921' },
+          '&.Mui-disabled': { backgroundColor: '#2A2A2A', color: '#5E5E5E' },
+        },
+        outlined: ({ theme }) => ({
+          borderColor: theme.palette.divider,
+          color: theme.palette.text.primary,
+          backgroundColor: theme.palette.background.paper,
+          '&:hover': { borderColor: alpha(theme.palette.text.primary, 0.4), backgroundColor: theme.palette.action.hover },
+        }),
+        text: ({ theme }) => ({ padding: '0 10px', color: theme.palette.text.secondary }),
+        sizeSmall: { height: 38, padding: '0 14px', fontSize: '0.75rem' },
       },
     },
     MuiCard: {
       styleOverrides: {
-        root: {
-          borderRadius: 20, boxShadow: 'none',
-        },
+        root: ({ theme }) => ({
+          borderRadius: 2,
+          boxShadow: 'none',
+          border: `1px solid ${theme.palette.divider}`,
+          backgroundColor: theme.palette.background.paper,
+          backgroundImage: 'none',
+        }),
       },
     },
     MuiChip: {
       styleOverrides: {
         root: {
-          borderRadius: 8, fontWeight: 600,
+          borderRadius: 2,
+          height: 26,
+          fontFamily: FONT_MONO,
+          fontSize: '0.68rem',
+          letterSpacing: '0.08em',
         },
+        outlined: ({ theme }) => ({ borderColor: theme.palette.divider }),
+        filled: ({ theme }) => ({ backgroundColor: theme.palette.action.selected }),
       },
     },
-    MuiIconButton: { styleOverrides: { root: ({ theme }) => ({ borderRadius: 14, '&:hover': { backgroundColor: alpha(theme.palette.primary.main, 0.1) } }) } },
-    MuiDialog: { styleOverrides: { paper: ({ theme }) => ({ borderRadius: 28, backgroundImage: 'none', backgroundColor: theme.palette.background.paper }) } },
-    MuiTextField: { defaultProps: { variant: 'outlined' }, styleOverrides: { root: ({ theme }) => ({ '& .MuiOutlinedInput-root': { borderRadius: 16, backgroundColor: alpha(theme.palette.primary.main, 0.04), '& fieldset': { borderColor: alpha(theme.palette.primary.main, 0.35) }, '&:hover fieldset': { borderColor: theme.palette.primary.main }, '&.Mui-focused fieldset': { borderWidth: 2 } } }) } },
-    MuiCssBaseline: { styleOverrides: { body: { minHeight: '100vh' }, '*': { scrollbarColor: 'rgba(90, 75, 145, .35) transparent' } } },
+    MuiIconButton: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          borderRadius: 2,
+          color: theme.palette.text.primary,
+          '&:hover': { backgroundColor: theme.palette.action.hover },
+        }),
+      },
+    },
+    MuiDialog: {
+      styleOverrides: {
+        paper: ({ theme }) => ({
+          borderRadius: 2,
+          border: `1px solid ${theme.palette.divider}`,
+          backgroundImage: 'none',
+          backgroundColor: theme.palette.background.paper,
+        }),
+      },
+    },
+    MuiAppBar: {
+      styleOverrides: {
+        root: { backgroundImage: 'none', boxShadow: 'none' },
+      },
+    },
+    MuiTextField: {
+      defaultProps: { variant: 'outlined' },
+      styleOverrides: {
+        root: ({ theme }) => ({
+          '& .MuiOutlinedInput-root': {
+            borderRadius: 2,
+            fontFamily: FONT_MONO,
+            fontSize: '0.875rem',
+            backgroundColor: theme.palette.background.paper,
+            '& fieldset': { borderColor: theme.palette.divider },
+            '&:hover fieldset': { borderColor: alpha(theme.palette.text.primary, 0.35) },
+            '&.Mui-focused fieldset': { borderColor: theme.palette.primary.main, borderWidth: 1 },
+          },
+          '& .MuiInputBase-input::placeholder': { color: theme.palette.text.secondary, opacity: 1 },
+        }),
+      },
+    },
+    MuiTooltip: {
+      styleOverrides: {
+        tooltip: ({ theme }) => ({
+          borderRadius: 2,
+          backgroundColor: theme.palette.text.primary,
+          color: theme.palette.background.default,
+          fontFamily: FONT_MONO,
+          fontSize: '0.7rem',
+          letterSpacing: '0.04em',
+        }),
+      },
+    },
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: { minHeight: '100vh' },
+        '*': { scrollbarColor: '#242424 transparent' },
+      },
+    },
   },
 };
 
-const colorPalettes = [
-  {
-    name: '薰衣草紫',
-    primary: { main: '#7B6EDB', container: '#DAD7F9', onContainer: '#201B47' },
-    secondary: { main: '#8B6F9D', container: '#E8D9F3', onContainer: '#2D1F3A' },
-    tertiary: { main: '#9A6B7C', container: '#F5D5DF', onContainer: '#3E1A26' },
-  },
-  {
-    name: '珊瑚粉',
-    primary: { main: '#E46F66', container: '#FFDAD7', onContainer: '#410E0C' },
-    secondary: { main: '#775653', container: '#FFDAD7', onContainer: '#2C1513' },
-    tertiary: { main: '#745A2F', container: '#FFDEA6', onContainer: '#281901' },
-  },
-  {
-    name: '天空蓝',
-    primary: { main: '#5390C0', container: '#D0E4F7', onContainer: '#0A1F32' },
-    secondary: { main: '#557E89', container: '#D7E9EF', onContainer: '#0A1F27' },
-    tertiary: { main: '#726B99', container: '#E5DEFF', onContainer: '#1D1837' },
-  },
-  {
-    name: '杏黄色',
-    primary: { main: '#C07D44', container: '#FFDCC4', onContainer: '#2E1600' },
-    secondary: { main: '#8B6E58', container: '#F5D0BA', onContainer: '#1E0F05' },
-    tertiary: { main: '#7E6E8D', container: '#E6DEFF', onContainer: '#1F1532' },
-  },
-  {
-    name: '玫瑰红',
-    primary: { main: '#A84E6A', container: '#FFD9E1', onContainer: '#3E0019' },
-    secondary: { main: '#7E5260', container: '#FFD9E5', onContainer: '#31101D' },
-    tertiary: { main: '#7C5B33', container: '#FFDDB1', onContainer: '#2E1900' },
-  },
-  {
-    name: '湖蓝色',
-    primary: { main: '#3A8692', container: '#B9EBF6', onContainer: '#001F24' },
-    secondary: { main: '#4C6A71', container: '#CDE4E9', onContainer: '#072025' },
-    tertiary: { main: '#5D6088', container: '#E1E0FF', onContainer: '#1A1D42' },
-  },
-  {
-    name: '琥珀色',
-    primary: { main: '#A3703D', container: '#FFDDB1', onContainer: '#361F00' },
-    secondary: { main: '#8C634A', container: '#FFDBCA', onContainer: '#391608' },
-    tertiary: { main: '#7C6B8E', container: '#E6DEFF', onContainer: '#1F1532' },
-  },
-  {
-    name: '蜜桃粉',
-    primary: { main: '#D36D7E', container: '#FFD9DE', onContainer: '#3E0E19' },
-    secondary: { main: '#8B5F65', container: '#FFD9DF', onContainer: '#301015' },
-    tertiary: { main: '#8F5E3B', container: '#FFDDB2', onContainer: '#311900' },
-  },
-  {
-    name: '丁香紫',
-    primary: { main: '#8F6F9E', container: '#E8D9F3', onContainer: '#241332' },
-    secondary: { main: '#7A6E8E', container: '#E5DEFF', onContainer: '#1F1532' },
-    tertiary: { main: '#8E685D', container: '#FFD9D3', onContainer: '#311009' },
-  },
-  {
-    name: '樱花粉',
-    primary: { main: '#D36A8E', container: '#FFD9E8', onContainer: '#3E0E24' },
-    secondary: { main: '#8D5F75', container: '#FFD9E9', onContainer: '#2B101E' },
-    tertiary: { main: '#7D6F5B', container: '#F0E5C9', onContainer: '#2E2100' },
-  },
-];
+export const createLightTheme = () => createTheme({
+  ...commonTheme,
+  palette: {
+    mode: 'light',
+    primary: { main: '#D71921', contrastText: '#FFFFFF' },
+    secondary: { main: '#5E5E5E' },
+    tertiary: { main: '#8C8C8C' },
+    background: {
+      default: '#F2F2F2',
+      paper: '#FFFFFF',
+    },
+    text: {
+      primary: '#000000',
+      secondary: '#5E5E5E',
+      disabled: '#8C8C8C',
+    },
+    divider: '#DCDCDC',
+    outline: '#DCDCDC',
+    error: { main: '#D71921' },
+  } as any,
+});
 
-export const getRandomPalette = () => {
-  const randomIndex = Math.floor(Math.random() * colorPalettes.length);
-  return colorPalettes[randomIndex];
-};
-
-export const getDefaultPalette = () => colorPalettes[0];
-
-export const createLightTheme = (palette: typeof colorPalettes[0]) => {
-  return createTheme({
-    ...commonTheme,
-    palette: {
-      mode: 'light',
-      primary: {
-        main: palette.primary.main,
-        container: palette.primary.container,
-        onContainer: palette.primary.onContainer,
-      } as any,
-      secondary: {
-        main: palette.secondary.main,
-        container: palette.secondary.container,
-        onContainer: palette.secondary.onContainer,
-      } as any,
-      tertiary: {
-        main: palette.tertiary.main,
-        container: palette.tertiary.container,
-        onContainer: palette.tertiary.onContainer,
-      } as any,
-      surface: {
-        main: '#FFFFFF',
-        variant: '#F0F4F4',
-        onMain: '#1A2A2A',
-        onVariant: '#3D4D4D',
-      } as any,
-      background: {
-        default: '#F5F8F8',
-        paper: '#FFFFFF',
-      },
-      text: {
-        primary: '#1A2A2A',
-        secondary: '#4A5F5F',
-      },
-      error: {
-        main: '#C75450',
-        container: '#FFD9D7',
-        onContainer: '#410E0D',
-      } as any,
-      outline: '#7A8F8F',
-    } as any,
-  });
-};
-
-export const createDarkTheme = (palette: typeof colorPalettes[0]) => {
-  return createTheme({
-    ...commonTheme,
-    palette: {
-      mode: 'dark',
-      primary: {
-        main: palette.primary.container,
-        container: palette.primary.main,
-        onContainer: '#FFFFFF',
-      } as any,
-      secondary: {
-        main: palette.secondary.container,
-        container: palette.secondary.main,
-        onContainer: '#FFFFFF',
-      } as any,
-      tertiary: {
-        main: palette.tertiary.container,
-        container: palette.tertiary.main,
-        onContainer: '#FFFFFF',
-      } as any,
-      surface: {
-        main: '#1C2626',
-        variant: '#2A3636',
-        onMain: '#E8EDED',
-        onVariant: '#C4D4D4',
-      } as any,
-      background: {
-        default: '#1C2626',
-        paper: '#1C2626',
-      },
-      text: {
-        primary: '#E8EDED',
-        secondary: '#B3C9C9',
-      },
-      error: {
-        main: '#F2B8B5',
-        container: '#8C1D18',
-        onContainer: '#F9DEDC',
-      } as any,
-      outline: '#6B8080',
-    } as any,
-  });
-};
-
-export const lightTheme = createLightTheme(colorPalettes[0]);
-export const darkTheme = createDarkTheme(colorPalettes[0]);
+export const createDarkTheme = () => createTheme({
+  ...commonTheme,
+  palette: {
+    mode: 'dark',
+    primary: { main: '#D71921', contrastText: '#FFFFFF' },
+    secondary: { main: '#8C8C8C' },
+    tertiary: { main: '#5E5E5E' },
+    background: {
+      default: '#000000',
+      paper: '#0A0A0A',
+    },
+    text: {
+      primary: '#F2F2F2',
+      secondary: '#8C8C8C',
+      disabled: '#5E5E5E',
+    },
+    divider: '#1E1E1E',
+    outline: '#2A2A2A',
+    error: { main: '#D71921' },
+  } as any,
+});

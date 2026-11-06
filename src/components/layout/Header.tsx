@@ -1,14 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { AppBar, Box, IconButton, Stack, Toolbar, Typography, alpha, useMediaQuery, useTheme } from '@mui/material';
-import { DarkMode, LightMode, Menu as MenuIcon, Close as CloseIcon, OpenInNew } from '@mui/icons-material';
+import React, { useState } from 'react';
+import {
+  AppBar, Box, IconButton, Stack, Toolbar, Typography, useMediaQuery, useTheme,
+} from '@mui/material';
+import {
+  ArrowOutward, Close as CloseIcon, DarkMode, LightMode, Menu as MenuIcon,
+} from '@mui/icons-material';
 import { Link, useLocation } from 'react-router-dom';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+import { FONT_DOTS, FONT_MONO, PAGE_MAX_WIDTH } from '../../theme/theme';
 
 interface HeaderProps { toggleTheme: () => void; isDarkMode: boolean; }
-interface NavItem { label: string; path?: string; href?: string; }
+interface NavItem { label: string; path: string; }
 
 const navItems: NavItem[] = [
   { label: '首页', path: '/' },
@@ -17,193 +18,97 @@ const navItems: NavItem[] = [
   { label: '友链', path: '/links' },
 ];
 
+const indexLabel = (i: number) => String(i + 1).padStart(2, '0');
+
 export const Header: React.FC<HeaderProps> = ({ toggleTheme, isDarkMode }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const theme = useTheme();
   const mobile = useMediaQuery(theme.breakpoints.down('md'));
   const location = useLocation();
-  const headerRef = useRef<HTMLDivElement>(null);
-  const menuRef = useRef<HTMLDivElement>(null);
-  const menuIconRef = useRef<HTMLButtonElement>(null);
 
-  useEffect(() => {
-    const header = headerRef.current;
-    if (!header) return;
-
-    const scrollTrigger = ScrollTrigger.create({
-      start: 50,
-      onEnter: () => {
-        gsap.to(header, {
-          backgroundColor: alpha(theme.palette.background.paper, 0.92),
-          duration: 0.3,
-          ease: 'power2.out',
-        });
-      },
-      onLeaveBack: () => {
-        gsap.to(header, {
-          backgroundColor: alpha(theme.palette.background.paper, 0.82),
-          duration: 0.3,
-          ease: 'power2.out',
-        });
-      },
-    });
-
-    return () => scrollTrigger.kill();
-  }, [theme]);
-
-  const closeMenu = () => {
-    setMobileOpen(false);
-    if (menuIconRef.current) {
-      gsap.to(menuIconRef.current, { rotate: 0, duration: 0.3, ease: 'back.out(1.7)' });
-    }
-  };
-
-  const toggleMobileMenu = () => {
-    setMobileOpen(!mobileOpen);
-    if (menuIconRef.current) {
-      gsap.to(menuIconRef.current, {
-        rotate: mobileOpen ? 0 : 90,
-        duration: 0.3,
-        ease: 'back.out(1.7)',
-      });
-    }
-  };
-
-  const navLink = (item: NavItem) => {
-    const selected = item.path ? location.pathname === item.path : false;
-    const isExternal = !!item.href;
-
+  const navLink = (item: NavItem, index: number) => {
+    const selected = location.pathname === item.path;
     return (
       <Box
-        key={item.path || item.label}
-        component={isExternal ? 'a' : Link}
-        href={isExternal ? item.href : undefined}
-        to={isExternal ? undefined : item.path}
-        target={isExternal ? '_blank' : undefined}
-        rel={isExternal ? 'noopener noreferrer' : undefined}
+        key={item.path}
+        component={Link}
+        to={item.path}
         sx={{
           display: 'flex',
-          alignItems: 'center',
-          gap: 0.4,
+          alignItems: 'baseline',
+          gap: 0.75,
           textDecoration: 'none',
-          color: selected ? 'primary.onContainer' : 'text.primary',
-          bgcolor: selected ? 'primary.container' : 'transparent',
-          fontWeight: selected ? 700 : 500,
-          borderRadius: 99,
-          px: 1.75,
-          py: 0.85,
-          transition: 'background-color .2s ease, color .2s ease',
-          '&:hover': { bgcolor: selected ? 'primary.container' : alpha(theme.palette.primary.main, 0.1) },
+          color: selected ? 'primary.main' : 'text.primary',
+          transition: 'color .2s ease',
+          '&:hover': { color: 'primary.main' },
+          '&:hover .nav-index': { color: 'primary.main' },
         }}
       >
-        {item.label}
-        {isExternal && <OpenInNew sx={{ fontSize: 13, opacity: 0.5 }} />}
+        <Box
+          component="span"
+          className="nav-index"
+          sx={{ fontFamily: FONT_MONO, fontSize: 9, letterSpacing: '1.2px', color: selected ? 'primary.main' : 'text.secondary', transition: 'color .2s ease' }}
+        >
+          {indexLabel(index)}
+        </Box>
+        <Box component="span" sx={{ fontSize: 13, letterSpacing: '0.04em', fontWeight: selected ? 700 : 400 }}>
+          {item.label}
+        </Box>
       </Box>
     );
   };
 
   const mobileNavLink = (item: NavItem, index: number) => {
-    const selected = item.path ? location.pathname === item.path : false;
-    const isExternal = !!item.href;
-    const linkRef = useRef<HTMLAnchorElement>(null);
-
-    useEffect(() => {
-      if (!linkRef.current || !mobileOpen) return;
-
-      gsap.fromTo(
-        linkRef.current,
-        { opacity: 0, x: -20 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.3,
-          delay: index * 0.08,
-          ease: 'power2.out',
-        }
-      );
-    }, [mobileOpen, index]);
-
+    const selected = location.pathname === item.path;
     return (
       <Box
-        key={item.path || item.label}
-        ref={linkRef}
-        component={isExternal ? 'a' : Link}
-        href={isExternal ? item.href : undefined}
-        to={isExternal ? undefined : item.path}
-        target={isExternal ? '_blank' : undefined}
-        rel={isExternal ? 'noopener noreferrer' : undefined}
-        onClick={closeMenu}
+        key={item.path}
+        component={Link}
+        to={item.path}
+        onClick={() => setMobileOpen(false)}
         sx={{
           display: 'flex',
           alignItems: 'center',
-          gap: 0.5,
-          textDecoration: 'none',
+          gap: 1.75,
+          py: 1.9,
+          borderTop: index === 0 ? 'none' : '1px solid',
+          borderColor: 'divider',
           color: selected ? 'primary.main' : 'text.primary',
-          fontWeight: selected ? 600 : 500,
-          fontSize: '1rem',
-          py: 1.75,
-          px: 1,
-          borderBottom: '1px solid',
-          borderColor: alpha(theme.palette.divider, 0.5),
-          transition: 'color .15s ease, padding-left .15s ease',
-          '&:hover': {
-            color: 'primary.main',
-            paddingLeft: 2,
-          },
-          '&:last-of-type': {
-            borderBottom: 'none',
-          },
+          textDecoration: 'none',
+          '&:hover': { color: 'primary.main' },
         }}
       >
-        {item.label}
-        {isExternal && <OpenInNew sx={{ fontSize: 14, color: 'text.secondary' }} />}
+        <Box component="span" sx={{ fontFamily: FONT_MONO, fontSize: 9.5, letterSpacing: '1.2px', color: selected ? 'primary.main' : 'text.secondary' }}>
+          {indexLabel(index)}
+        </Box>
+        <Typography sx={{ flexGrow: 1, fontSize: 14, fontWeight: selected ? 700 : 400 }}>{item.label}</Typography>
+        <ArrowOutward sx={{ fontSize: 16, color: 'text.secondary' }} />
       </Box>
     );
   };
 
-  useEffect(() => {
-    const menu = menuRef.current;
-    if (!menu) return;
-
-    if (mobileOpen) {
-      gsap.fromTo(
-        menu,
-        { height: 0, opacity: 0 },
-        {
-          height: 'auto',
-          opacity: 1,
-          duration: 0.35,
-          ease: 'power2.out',
-        }
-      );
-    } else {
-      gsap.fromTo(
-        menu,
-        { height: 'auto', opacity: 1 },
-        {
-          height: 0,
-          opacity: 0,
-          duration: 0.3,
-          ease: 'power2.out',
-        }
-      );
-    }
-  }, [mobileOpen]);
-
   return (
     <>
       <AppBar
-        ref={headerRef}
         position="fixed"
         elevation={0}
         sx={{
-          bgcolor: alpha(theme.palette.background.paper, 0.82),
-          backgroundImage: 'none',
-          backdropFilter: 'blur(18px)',
+          bgcolor: 'background.default',
+          borderBottom: '1px solid',
+          borderColor: 'divider',
           zIndex: theme.zIndex.drawer + 1,
         }}
       >
-        <Toolbar sx={{ maxWidth: 1200, minHeight: { xs: 64, md: 80 }, width: '100%', mx: 'auto', px: { xs: 2, md: 3 } }}>
+        <Toolbar
+          disableGutters
+          sx={{
+            width: '100%',
+            maxWidth: PAGE_MAX_WIDTH,
+            mx: 'auto',
+            px: { xs: 2, sm: 3 },
+            minHeight: { xs: '64px !important', md: '64px !important' },
+          }}
+        >
           <Typography
             component={Link}
             to="/"
@@ -211,59 +116,61 @@ export const Header: React.FC<HeaderProps> = ({ toggleTheme, isDarkMode }) => {
               flexGrow: 1,
               color: 'text.primary',
               textDecoration: 'none',
-              fontSize: '1.1rem',
-              fontWeight: 800,
-              letterSpacing: '-0.045em',
+              fontFamily: FONT_DOTS,
+              fontSize: 20,
+              fontWeight: 900,
+              letterSpacing: '2px',
+              lineHeight: 1,
             }}
           >
-            QICHEN<Box component="span" sx={{ color: 'primary.main' }}>.</Box>
+            QICHEN.
           </Typography>
+
           {mobile ? (
-            <Stack direction="row" spacing={0.5}>
+            <Stack direction="row" spacing={0.5} alignItems="center">
               <IconButton onClick={toggleTheme} aria-label="切换主题">
-                {isDarkMode ? <LightMode /> : <DarkMode />}
+                {isDarkMode ? <LightMode sx={{ fontSize: 19 }} /> : <DarkMode sx={{ fontSize: 19 }} />}
               </IconButton>
               <IconButton
-                ref={menuIconRef}
-                onClick={toggleMobileMenu}
+                onClick={() => setMobileOpen((prev) => !prev)}
                 aria-label={mobileOpen ? '关闭导航' : '打开导航'}
               >
-                {mobileOpen ? <CloseIcon /> : <MenuIcon />}
+                {mobileOpen ? <CloseIcon sx={{ fontSize: 21 }} /> : <MenuIcon sx={{ fontSize: 21 }} />}
               </IconButton>
             </Stack>
           ) : (
-            <Stack direction="row" spacing={1.25} alignItems="center">
-              <Box sx={{ display: 'flex', gap: 0.5, p: 0.5, bgcolor: alpha(theme.palette.primary.main, 0.08), borderRadius: 99 }}>
-                {navItems.map((item) => navLink(item))}
-              </Box>
-              <IconButton onClick={toggleTheme} aria-label="切换主题">
-                {isDarkMode ? <LightMode /> : <DarkMode />}
+            <Stack direction="row" spacing={2.75} alignItems="center">
+              {navItems.map((item, index) => navLink(item, index))}
+              <IconButton onClick={toggleTheme} aria-label="切换主题" sx={{ ml: 0.5 }}>
+                {isDarkMode ? <LightMode sx={{ fontSize: 18 }} /> : <DarkMode sx={{ fontSize: 18 }} />}
               </IconButton>
             </Stack>
           )}
         </Toolbar>
       </AppBar>
 
-      {mobile && (
-        <div
-          ref={menuRef}
-          style={{
+      {mobile && mobileOpen && (
+        <Box
+          sx={{
             position: 'fixed',
             top: 64,
             left: 0,
             right: 0,
             zIndex: theme.zIndex.drawer,
-            overflow: 'hidden',
-            backgroundColor: alpha(theme.palette.background.paper, 0.95),
-            backdropFilter: 'blur(18px)',
+            bgcolor: 'background.default',
             borderBottom: '1px solid',
-            borderColor: alpha(theme.palette.divider, 0.5),
+            borderColor: 'divider',
+            animation: 'menuDrop .22s ease both',
+            '@keyframes menuDrop': {
+              from: { opacity: 0, transform: 'translateY(-8px)' },
+              to: { opacity: 1, transform: 'translateY(0)' },
+            },
           }}
         >
-          <Box sx={{ maxWidth: 1200, mx: 'auto', px: 2, py: 1 }}>
+          <Box sx={{ maxWidth: PAGE_MAX_WIDTH, mx: 'auto', px: 2, pb: 1 }}>
             {navItems.map((item, index) => mobileNavLink(item, index))}
           </Box>
-        </div>
+        </Box>
       )}
     </>
   );

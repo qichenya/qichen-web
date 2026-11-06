@@ -1,16 +1,14 @@
 import React, { useEffect, useRef } from 'react';
-import { Avatar, Box, Container, Stack, Typography, useTheme } from '@mui/material';
-import { ArrowOutward, Link as LinkIcon } from '@mui/icons-material';
+import { Box, Typography } from '@mui/material';
+import { ArrowOutward } from '@mui/icons-material';
 import { friendLinks } from '../data/friendLinks';
+import { FONT_DOTS, FONT_MONO, PAGE_MAX_WIDTH } from '../theme/theme';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const getInitial = (name: string) => name.trim().charAt(0).toUpperCase();
-
 export const LinksPage: React.FC = () => {
-  const theme = useTheme();
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -21,10 +19,10 @@ export const LinksPage: React.FC = () => {
     if (reduceMotion) return;
 
     const ctx = gsap.context(() => {
-      gsap.fromTo('[data-links="header"]', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' });
-      gsap.fromTo('[data-links="card"]', { opacity: 0, y: 50, scale: 0.96 }, {
-        opacity: 1, y: 0, scale: 1, duration: 0.6, stagger: 0.1, ease: 'power3.out',
-        scrollTrigger: { trigger: '[data-links="grid"]', start: 'top 80%' },
+      gsap.fromTo('[data-links="header"]', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
+      gsap.fromTo('[data-links="row"]', { opacity: 0, x: -14 }, {
+        opacity: 1, x: 0, duration: 0.45, stagger: 0.07, ease: 'power2.out',
+        scrollTrigger: { trigger: '[data-links="grid"]', start: 'top 88%' },
       });
     }, scope);
 
@@ -32,55 +30,84 @@ export const LinksPage: React.FC = () => {
   }, []);
 
   return (
-    <Box ref={containerRef} sx={{ minHeight: '100vh', py: { xs: 11, md: 14 }, overflow: 'hidden', bgcolor: 'background.default' }}>
-      <Container maxWidth="lg">
-        <Box data-links="header" sx={{ maxWidth: 690, mb: { xs: 6, md: 8 } }}>
-          <Stack direction="row" spacing={1} alignItems="center" sx={{ color: 'primary.main', mb: 2 }}>
-            <LinkIcon sx={{ fontSize: 20 }} />
-            <Typography variant="overline" sx={{ fontWeight: 800, letterSpacing: '0.16em' }}>FRIEND LINKS</Typography>
-          </Stack>
-          <Typography component="h1" sx={{ fontSize: { xs: '3rem', md: '4.7rem' }, lineHeight: 0.95, fontWeight: 800, letterSpacing: '-0.07em', mb: 2.2 }}>
-            值得常去<br /><Box component="span" sx={{ color: 'primary.main' }}>的角落。</Box>
+    <Box ref={containerRef} sx={{ minHeight: '100vh', pt: { xs: 12, md: 15 }, pb: { xs: 8, md: 10 }, overflow: 'hidden' }}>
+      <Box sx={{ maxWidth: PAGE_MAX_WIDTH, mx: 'auto', px: 3 }}>
+        <Box data-links="header">
+          <Typography sx={{ fontFamily: FONT_MONO, fontSize: 9, letterSpacing: '1.6px', color: 'primary.main' }}>
+            FRIEND LINKS / 04
           </Typography>
-          <Typography color="text.secondary" sx={{ fontSize: { xs: '1rem', md: '1.12rem' }, lineHeight: 1.8, maxWidth: 460 }}>
-            这里收藏了一些朋友的个人空间。点击卡片，去看看他们正在创造什么。
+          <Typography
+            component="h1"
+            sx={{ mt: 1.5, fontFamily: FONT_DOTS, fontWeight: 900, fontSize: { xs: '2.9rem', sm: '3.6rem' }, lineHeight: 0.95, letterSpacing: '2px' }}
+          >
+            ELSEWHERE.
+          </Typography>
+          <Typography sx={{ mt: 2, fontSize: { xs: 13.5, md: 14.5 }, lineHeight: 1.85, color: 'text.secondary', maxWidth: 460 }}>
+            这里收藏了一些朋友的个人空间。点开任一条目，去看看他们正在创造什么。
           </Typography>
         </Box>
 
-        <Box data-links="grid" sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, minmax(0, 1fr))', lg: 'repeat(3, minmax(0, 1fr))' }, gap: 2.25 }}>
-          {friendLinks.map((link) => (
-            <Box key={link.name} data-links="card" sx={{ height: '100%' }}>
-              <Box
+        <Box data-links="grid" sx={{ mt: { xs: 4, md: 5 }, borderTop: '1px solid', borderColor: 'divider' }}>
+          {friendLinks.map((link, index) => (
+            <Box
+              key={link.name}
+              data-links="row"
               component="a"
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
               sx={{
-                minHeight: 215, p: 3, borderRadius: 4, position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', color: 'inherit', textDecoration: 'none',
-                bgcolor: 'background.paper', border: `1px solid ${theme.palette.primary.main}1C`, boxShadow: `0 12px 28px ${theme.palette.primary.main}08`,
-                transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease',
-                '&::before': { content: '""', position: 'absolute', width: 170, height: 170, borderRadius: '50%', right: -75, bottom: -85, bgcolor: `${theme.palette.primary.main}11`, transition: 'transform 0.4s ease' },
-                '&:hover': { transform: 'translateY(-7px)', borderColor: `${theme.palette.primary.main}65`, boxShadow: `0 22px 42px ${theme.palette.primary.main}18`, '&::before': { transform: 'scale(1.38)' }, '& .link-arrow': { transform: 'translate(3px, -3px)', color: 'primary.main' } },
-              }}>
-              <Stack direction="row" justifyContent="space-between" alignItems="flex-start" sx={{ position: 'relative', zIndex: 1 }}>
-                <Avatar sx={{ width: 48, height: 48, bgcolor: `${theme.palette.primary.main}16`, color: 'primary.main', fontWeight: 800, fontSize: '1.35rem' }}>{getInitial(link.name)}</Avatar>
-                <ArrowOutward className="link-arrow" sx={{ color: 'text.secondary', transition: 'all 0.25s ease' }} />
-              </Stack>
-              <Box sx={{ mt: 'auto', position: 'relative', zIndex: 1 }}>
-                <Typography variant="h5" sx={{ fontWeight: 800, letterSpacing: '-0.025em', mb: 0.7 }}>{link.name}</Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.7 }}>{link.description}</Typography>
-                <Typography variant="caption" sx={{ display: 'block', color: 'primary.main', fontWeight: 700, mt: 1.5 }}>{new URL(link.url).hostname}</Typography>
+                display: 'grid',
+                gridTemplateColumns: '24px 1fr auto',
+                columnGap: 1.75,
+                rowGap: 0.5,
+                alignItems: 'baseline',
+                py: 2.1,
+                borderBottom: '1px solid',
+                borderColor: 'divider',
+                color: 'inherit',
+                textDecoration: 'none',
+                transition: 'background-color .2s ease',
+                '&:hover .link-name': { color: 'primary.main' },
+                '&:hover .link-arrow': { color: 'primary.main', transform: 'translate(2px, -2px)' },
+              }}
+            >
+              <Box component="span" sx={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: '0.06em', color: 'primary.main' }}>
+                {String(index + 1).padStart(2, '0')}
               </Box>
+              <Box sx={{ minWidth: 0 }}>
+                <Typography className="link-name" sx={{ fontSize: 15, fontWeight: 500, letterSpacing: '0.02em', transition: 'color .2s ease' }}>
+                  {link.name}
+                </Typography>
+                <Typography sx={{ fontSize: 12.5, color: 'text.secondary', mt: 0.5, lineHeight: 1.7 }}>
+                  {link.description}
+                </Typography>
+              </Box>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Box
+                  component="span"
+                  sx={{ display: { xs: 'none', sm: 'block' }, fontFamily: FONT_MONO, fontSize: 9.5, letterSpacing: '0.04em', color: 'text.secondary' }}
+                >
+                  {new URL(link.url).hostname}
+                </Box>
+                <ArrowOutward className="link-arrow" sx={{ fontSize: 14, color: 'text.secondary', transition: 'all .2s ease' }} />
               </Box>
             </Box>
           ))}
-
-          <Box data-links="card" sx={{ minHeight: 215, p: 3, borderRadius: 4, border: `1px dashed ${theme.palette.primary.main}65`, display: 'flex', flexDirection: 'column', justifyContent: 'center', bgcolor: `${theme.palette.primary.main}08` }}>
-            <Typography variant="h6" sx={{ fontWeight: 800, mb: 1 }}>想交换友链？</Typography>
-            <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.7 }}>欢迎通过关于页的联系方式找到我，一起把这片互联网的小角落连接起来。</Typography>
-          </Box>
         </Box>
-      </Container>
+
+        <Box
+          data-links="row"
+          sx={{ mt: 4, px: 2, py: 2.25, border: '1px dashed', borderColor: 'divider', borderRadius: '2px' }}
+        >
+          <Typography sx={{ fontFamily: FONT_MONO, fontSize: 9, letterSpacing: '1.4px', color: 'primary.main', mb: 1 }}>
+            EXCHANGE
+          </Typography>
+          <Typography sx={{ fontSize: 13, color: 'text.secondary', lineHeight: 1.8 }}>
+            欢迎通过关于页的联系方式找到我，一起把这片互联网的小角落连接起来。
+          </Typography>
+        </Box>
+      </Box>
     </Box>
   );
 };

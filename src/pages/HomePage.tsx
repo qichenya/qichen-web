@@ -1,79 +1,36 @@
 import React, { useEffect, useRef } from 'react';
-import { Avatar, Box, Button, Chip, Container, Stack, Typography, useTheme } from '@mui/material';
-import { ArrowOutward, AutoAwesome, GitHub } from '@mui/icons-material';
+import { Avatar, Box, Button, Stack, Typography, alpha, useTheme } from '@mui/material';
+import { ArrowOutward, GitHub } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { personalInfo } from '../data/personalInfo';
+import { FONT_DOTS, FONT_MONO, PAGE_MAX_WIDTH } from '../theme/theme';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger);
+const readout: { label: string; value: string }[] = [
+  { label: 'STATUS', value: '持续学习中' },
+  { label: 'FOCUS', value: 'Linux · 自动化 · 嵌入式' },
+  { label: 'LOCATION', value: personalInfo.location },
+  { label: 'CONTACT', value: personalInfo.email },
+];
 
 export const HomePage: React.FC = () => {
   const theme = useTheme();
   const heroRef = useRef<HTMLDivElement>(null);
-  const magneticRef = useRef<HTMLAnchorElement>(null);
-  const blobRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduceMotion) return;
 
     const ctx = gsap.context(() => {
-      gsap.fromTo('[data-hero="chip"]', { opacity: 0, y: -16 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
-      gsap.fromTo('[data-hero="status"]', { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.6, delay: 0.15, ease: 'power2.out' });
-      gsap.fromTo('[data-hero="title"] .char', { opacity: 0, y: 80, rotateX: -90 }, { opacity: 1, y: 0, rotateX: 0, duration: 0.7, delay: 0.3, stagger: 0.045, ease: 'back.out(1.5)' });
-      gsap.fromTo('[data-hero="subtitle"]', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, delay: 0.9, ease: 'power2.out' });
-      gsap.fromTo('[data-hero="cta"] > *', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, delay: 1.05, stagger: 0.12, ease: 'power2.out' });
-
-      gsap.to(blobRef.current, {
-        x: 'random(-30, 30)',
-        y: 'random(-30, 30)',
-        duration: 'random(8, 12)',
-        repeat: -1,
-        ease: 'sine.inOut',
-        yoyo: true,
-      });
+      gsap.fromTo('[data-hero="chip"]', { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' });
+      gsap.fromTo('[data-hero="status"]', { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.5, delay: 0.12, ease: 'power2.out' });
+      gsap.fromTo('[data-hero="title"] .char', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.6, delay: 0.25, stagger: 0.035, ease: 'power3.out' });
+      gsap.fromTo('[data-hero="subtitle"]', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, delay: 0.75, ease: 'power2.out' });
+      gsap.fromTo('[data-hero="cta"] > *', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, delay: 0.9, stagger: 0.1, ease: 'power2.out' });
+      gsap.fromTo('[data-hero="readout"]', { opacity: 0 }, { opacity: 1, duration: 0.6, delay: 1.1 });
     }, heroRef);
 
     return () => ctx.revert();
-  }, []);
-
-  useEffect(() => {
-    const button = magneticRef.current;
-    if (!button) return;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = button.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-
-      gsap.to(button, {
-        x: x * 0.3,
-        y: y * 0.3,
-        scale: 1.05,
-        duration: 0.4,
-        ease: 'power2.out',
-      });
-    };
-
-    const handleMouseLeave = () => {
-      gsap.to(button, {
-        x: 0,
-        y: 0,
-        scale: 1,
-        duration: 0.5,
-        ease: 'elastic.out(1, 0.4)',
-      });
-    };
-
-    button.addEventListener('mousemove', handleMouseMove);
-    button.addEventListener('mouseleave', handleMouseLeave);
-
-    return () => {
-      button.removeEventListener('mousemove', handleMouseMove);
-      button.removeEventListener('mouseleave', handleMouseLeave);
-      gsap.killTweensOf(button);
-    };
   }, []);
 
   const splitChars = (text: string) =>
@@ -81,38 +38,192 @@ export const HomePage: React.FC = () => {
       <Box component="span" key={i} className="char" sx={{ display: 'inline-block' }}>{ch === ' ' ? '\u00A0' : ch}</Box>
     ));
 
-  return <Box sx={{ overflow: 'hidden', position: 'relative', bgcolor: 'background.default' }}>
-    <Box ref={blobRef} sx={{ position: 'absolute', width: 420, height: 420, borderRadius: '50%', top: -80, right: -100, bgcolor: `${theme.palette.primary.main}0A`, filter: 'blur(60px)', pointerEvents: 'none', zIndex: 0 }} />
-    <Box component="section" ref={heroRef} sx={{
-      minHeight: '100vh', display: 'flex', alignItems: 'center', pt: { xs: 11, md: 8 }, pb: { xs: 7, md: 5 }, bgcolor: 'background.default', position: 'relative', zIndex: 1,
-    }}>
-      <Container maxWidth="lg">
-        <Box sx={{ maxWidth: 790 }}>
-          <Box data-hero="chip"><Chip icon={<AutoAwesome sx={{ fontSize: '16px !important' }} />} label="PERSONAL SPACE · 2026" sx={{ mb: { xs: 3, md: 4 }, px: 0.75, height: 34, borderRadius: '20px', bgcolor: `${theme.palette.primary.main}16`, color: 'primary.main', fontWeight: 700, letterSpacing: '0.08em', fontSize: '0.7rem', '& .MuiChip-icon': { color: 'primary.main' } }} /></Box>
-          <Stack data-hero="status" direction="row" spacing={2} alignItems="center" sx={{ mb: { xs: 3, md: 4 } }}>
-            <Box sx={{ position: 'relative' }}>
-              <Avatar src={personalInfo.avatar} alt={personalInfo.name} sx={{ width: { xs: 52, md: 64 }, height: { xs: 52, md: 64 }, border: `3px solid ${theme.palette.background.paper}`, boxShadow: `0 10px 26px ${theme.palette.primary.main}38` }} />
-              <Box sx={{ position: 'absolute', right: 0, bottom: 1, width: 13, height: 13, borderRadius: '50%', bgcolor: '#59C783', border: `2px solid ${theme.palette.background.default}` }} />
+  return (
+    <Box sx={{ overflow: 'hidden', position: 'relative', bgcolor: 'background.default' }}>
+      <Box
+        component="section"
+        ref={heroRef}
+        sx={{ pt: { xs: '112px', md: '152px' }, pb: { xs: 6, md: 7 } }}
+      >
+        <Box sx={{ maxWidth: PAGE_MAX_WIDTH, mx: 'auto', px: 3 }}>
+          <Box
+            data-hero="chip"
+            sx={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 1,
+              px: 1.4,
+              py: 0.75,
+              border: '1px solid',
+              borderColor: 'divider',
+              borderRadius: '2px',
+              bgcolor: 'background.paper',
+              fontFamily: FONT_MONO,
+              fontSize: 11,
+              letterSpacing: '0.09em',
+              color: 'primary.main',
+            }}
+          >
+            <Box component="span" sx={{ width: 6, height: 6, bgcolor: 'primary.main' }} />
+            PERSONAL SPACE · 2026
+          </Box>
+
+          <Stack data-hero="status" direction="row" spacing={2} alignItems="center" sx={{ mt: 3 }}>
+            <Box sx={{ position: 'relative', width: 52, height: 52, flex: 'none' }}>
+              <Avatar
+                src={personalInfo.avatar}
+                alt={personalInfo.name}
+                sx={{ width: 46, height: 46, m: '3px', borderRadius: '50%' }}
+              />
+              <Box
+                sx={{
+                  position: 'absolute',
+                  right: 0,
+                  bottom: 3,
+                  width: 12,
+                  height: 12,
+                  borderRadius: '50%',
+                  bgcolor: 'primary.main',
+                  boxShadow: `0 0 0 2px ${theme.palette.background.default}`,
+                }}
+              />
             </Box>
             <Box>
-              <Typography variant="body2" color="text.secondary" sx={{ letterSpacing: '0.04em' }}>CURRENTLY EXPLORING</Typography>
-              <Typography fontWeight={700}>Linux · Automation · Infrastructure</Typography>
+              <Typography sx={{ fontFamily: FONT_MONO, fontSize: 11.5, letterSpacing: '0.1em', color: 'text.secondary' }}>
+                CURRENTLY EXPLORING
+              </Typography>
+              <Typography sx={{ fontFamily: FONT_MONO, fontSize: 15, letterSpacing: '0.02em', mt: 0.25 }}>
+                Linux · Automation · Infrastructure
+              </Typography>
             </Box>
           </Stack>
-          <Typography data-hero="title" component="h1" sx={{ fontSize: { xs: '3.35rem', sm: '4.6rem', md: '6.7rem' }, lineHeight: 0.93, fontWeight: 800, letterSpacing: '-0.075em', perspective: 800 }}>
+
+          <Typography
+            data-hero="title"
+            component="h1"
+            sx={{
+              mt: 3,
+              fontFamily: FONT_DOTS,
+              fontWeight: 900,
+              fontSize: { xs: '4rem', sm: '5.6rem', md: '6.5rem' },
+              lineHeight: 0.9,
+              letterSpacing: '1px',
+            }}
+          >
             {splitChars('BUILD')}<br />
-            <Box component="span" sx={{ color: 'primary.main', position: 'relative', display: 'inline-block' }}>
+            <Box component="span" sx={{ display: 'inline-block' }}>
               {splitChars('QUIETLY.')}
-              <Box component="span" sx={{ position: 'absolute', width: { xs: 10, md: 14 }, height: { xs: 10, md: 14 }, right: { xs: -15, md: -20 }, top: 2, borderRadius: '50%', bgcolor: 'secondary.main' }} />
+              <Box
+                component="span"
+                sx={{
+                  display: 'inline-block',
+                  width: { xs: 10, md: 14 },
+                  height: { xs: 10, md: 14 },
+                  ml: 1.5,
+                  bgcolor: 'primary.main',
+                  verticalAlign: '0.06em',
+                }}
+              />
             </Box>
           </Typography>
-          <Typography data-hero="subtitle" sx={{ mt: { xs: 3, md: 4 }, maxWidth: 525, fontSize: { xs: '1rem', md: '1.18rem' }, lineHeight: 1.8, color: 'text.secondary' }}>欢迎来到 {personalInfo.name} 的数字花园。记录折腾服务器、自动化工具和持续学习的每一步。</Typography>
-          <Stack data-hero="cta" direction={{ xs: 'column', sm: 'row' }} spacing={1.5} sx={{ mt: { xs: 4, md: 5 } }}>
-            <Button ref={magneticRef} component={Link} to="/about" variant="contained" endIcon={<ArrowOutward />} sx={{ px: 3.2, py: 1.35, width: { xs: '100%', sm: 'fit-content' }, boxShadow: `0 12px 28px ${theme.palette.primary.main}42`, '&:hover': { boxShadow: `0 18px 34px ${theme.palette.primary.main}55` } }}>认识我</Button>
-            <Button component="a" href={personalInfo.github} target="_blank" rel="noreferrer" variant="outlined" startIcon={<GitHub />} sx={{ px: 3, py: 1.35, width: { xs: '100%', sm: 'fit-content' }, color: 'text.primary' }}>GitHub</Button>
+
+          <Typography
+            data-hero="subtitle"
+            sx={{ mt: 3, maxWidth: 525, fontSize: { xs: '0.95rem', md: '1rem' }, lineHeight: 1.8, color: 'text.secondary' }}
+          >
+            欢迎来到 {personalInfo.name} 的数字花园。记录折腾服务器、自动化工具和持续学习的每一步。
+          </Typography>
+
+          <Stack data-hero="cta" direction={{ xs: 'column', sm: 'row' }} spacing={1.5} sx={{ mt: 4 }}>
+            <Button
+              component={Link}
+              to="/about"
+              variant="contained"
+              endIcon={<ArrowOutward />}
+              sx={{ width: { xs: '100%', sm: 'fit-content' } }}
+            >
+              认识我
+            </Button>
+            <Button
+              component="a"
+              href={personalInfo.github}
+              target="_blank"
+              rel="noreferrer"
+              variant="outlined"
+              startIcon={<GitHub />}
+              sx={{ width: { xs: '100%', sm: 'fit-content' } }}
+            >
+              GitHub
+            </Button>
           </Stack>
+
+          <Box data-hero="readout" sx={{ mt: { xs: 6, md: 7 } }}>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                pb: 1.5,
+                borderBottom: '1px solid',
+                borderColor: 'divider',
+              }}
+            >
+              <Typography sx={{ fontFamily: FONT_MONO, fontSize: 9, letterSpacing: '1.8px', color: 'text.secondary' }}>
+                SYSTEM READOUT
+              </Typography>
+              <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.75 }}>
+                <Box component="span" sx={{ width: 5, height: 5, bgcolor: 'primary.main' }} />
+                <Typography sx={{ fontFamily: FONT_MONO, fontSize: 9, letterSpacing: '1.4px', color: 'primary.main' }}>
+                  LIVE
+                </Typography>
+              </Box>
+            </Box>
+            {readout.map((row) => (
+              <Box
+                key={row.label}
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  gap: 2,
+                  py: 1.6,
+                  borderBottom: '1px solid',
+                  borderColor: 'divider',
+                }}
+              >
+                <Box sx={{ fontFamily: FONT_MONO, fontSize: 11, letterSpacing: '0.12em', color: 'text.secondary' }}>
+                  {row.label}
+                </Box>
+                <Box sx={{ fontFamily: FONT_MONO, fontSize: 12.5, letterSpacing: '0.03em', textAlign: 'right', wordBreak: 'break-all' }}>
+                  {row.value}
+                </Box>
+              </Box>
+            ))}
+          </Box>
         </Box>
-      </Container>
+      </Box>
+
+      <Box
+        aria-hidden
+        sx={{
+          height: { xs: 140, md: 180 },
+          overflow: 'hidden',
+          display: 'flex',
+          alignItems: 'flex-end',
+          justifyContent: 'center',
+          borderTop: '1px solid',
+          borderColor: 'divider',
+          fontFamily: FONT_DOTS,
+          fontWeight: 900,
+          fontSize: { xs: 120, md: 175 },
+          lineHeight: 1,
+          letterSpacing: '-2px',
+          color: alpha(theme.palette.text.primary, 0.07),
+          whiteSpace: 'nowrap',
+          userSelect: 'none',
+        }}
+      >
+        QICHEN
+      </Box>
     </Box>
-  </Box>;
+  );
 };

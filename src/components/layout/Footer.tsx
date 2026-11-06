@@ -1,14 +1,22 @@
 import React from 'react';
-import { Box, Container, Typography } from '@mui/material';
-import { alpha } from '@mui/material/styles';
+import { Box } from '@mui/material';
+import { FONT_MONO, PAGE_MAX_WIDTH } from '../../theme/theme';
 
 const MOE_ICP_NUMBER = '20264169';
 const MOE_ICP_LABEL = `萌ICP备${MOE_ICP_NUMBER}号`;
 const MOE_ICP_URL = `https://icp.gov.moe/?keyword=${MOE_ICP_NUMBER}`;
 
 export const Footer: React.FC = () => (
-  <Box component="footer" sx={{ py: 3.5, mt: 'auto' }}>
-    <Container maxWidth="lg">
+  <Box
+    component="footer"
+    sx={{
+      mt: 'auto',
+      borderTop: '1px solid',
+      borderColor: 'divider',
+      py: 3.5,
+    }}
+  >
+    <Box sx={{ maxWidth: PAGE_MAX_WIDTH, mx: 'auto', px: 3 }}>
       <Box
         sx={{
           display: 'flex',
@@ -16,15 +24,18 @@ export const Footer: React.FC = () => (
           alignItems: 'center',
           gap: 2,
           flexWrap: 'wrap',
+          fontFamily: FONT_MONO,
+          fontSize: 12,
+          letterSpacing: '0.08em',
           color: 'text.secondary',
         }}
       >
-        <Typography variant="body2">© {new Date().getFullYear()} QICHEN</Typography>
-        <Typography variant="body2">Built with care.</Typography>
+        <Box component="span">© {new Date().getFullYear()} QICHEN</Box>
+        <Box component="span" sx={{ textTransform: 'uppercase' }}>Built with care.</Box>
       </Box>
 
       {/* 萌备（MoeICP）要求页脚常驻链接，桌面端与移动端都必须可见 */}
-      <Box sx={{ mt: 1.75, display: 'flex', justifyContent: 'center' }}>
+      <Box sx={{ mt: 2, display: 'flex', justifyContent: 'center' }}>
         <Box
           component="a"
           href={MOE_ICP_URL}
@@ -35,30 +46,23 @@ export const Footer: React.FC = () => (
             display: 'inline-flex',
             alignItems: 'center',
             px: 1.5,
-            py: 0.5,
+            py: 0.4,
             borderRadius: '999px',
             border: '1px solid',
             borderColor: 'divider',
             color: 'text.secondary',
-            typography: 'caption',
-            lineHeight: 1.5,
-            letterSpacing: '0.06em',
-            transition: 'color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease',
-            '&:hover': {
-              color: 'primary.main',
-              borderColor: 'primary.main',
-              bgcolor: (theme) => alpha(theme.palette.primary.main, 0.08),
-            },
-            '&:focus-visible': {
-              outline: '2px solid',
-              outlineColor: 'primary.main',
-              outlineOffset: 2,
-            },
+            fontFamily: FONT_MONO,
+            fontSize: 11,
+            lineHeight: 1.6,
+            letterSpacing: '0.04em',
+            transition: 'color .2s ease, border-color .2s ease',
+            '&:hover': { color: 'primary.main', borderColor: 'primary.main' },
+            '&:focus-visible': { outline: '2px solid', outlineColor: 'primary.main', outlineOffset: 2 },
           }}
         >
           {MOE_ICP_LABEL}
         </Box>
       </Box>
-    </Container>
+    </Box>
   </Box>
 );
