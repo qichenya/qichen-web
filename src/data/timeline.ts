@@ -46,7 +46,7 @@ export const timelineItems: TimelineItem[] = [
     date: '2024下半年',
     title: '完成了qichen-web的第二版',
     organization: '带领',
-    description: '完成第二版设计后和带我的那个吵了一下',
+    description: '完成第二版设计后和带我的那个抄了一下',
   },
   {
     id: '6',
@@ -83,9 +83,17 @@ export const timelineItems: TimelineItem[] = [
   {
     id: '9',
     type: 'milestone',
-    date: '现在',
+    date: '2026年中',
     title: '正在学习网络架构以及ISCSI实际使用',
     organization: '自学',
     description: 'Microsoft Fuck you!',
+  },
+  {
+    id: '10',
+    type: 'milestone',
+    date: '现在',
+    title: '完成了qichen-web的第四版',
+    organization: '自学',
+    description: 'Pen.dev真好用awa~',
   },
 ];
