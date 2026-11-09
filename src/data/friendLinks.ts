@@ -34,4 +34,9 @@ export const friendLinks: FriendLink[] = [
     url: 'https://blog.foxnature.net/',
     description: '我不是狐，却借狐名；你若唤我狐狐，我便答应。',
   },
+  {
+    name: '七毛钱的苹果',
+    url: 'https://70centsapple.top/',
+    description: 'Be innocent, be confident.',
+  },
 ];
