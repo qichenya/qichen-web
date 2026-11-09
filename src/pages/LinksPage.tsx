@@ -11,6 +11,15 @@ gsap.registerPlugin(ScrollTrigger);
 export const LinksPage: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // 跳转前先进入检查页：可访问则自动跳转，不可访问则展示错误页
+  const openWithCheck = (event: React.MouseEvent<HTMLAnchorElement>, url: string) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    const href = `/link-error?target=${encodeURIComponent(url)}`;
+    const opened = window.open(href, '_blank');
+    if (!opened) window.location.href = href;
+  };
+
   useEffect(() => {
     const scope = containerRef.current;
     if (!scope) return;
@@ -56,6 +65,7 @@ export const LinksPage: React.FC = () => {
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(event) => openWithCheck(event, link.url)}
               sx={{
                 display: 'grid',
                 gridTemplateColumns: '24px 1fr auto',

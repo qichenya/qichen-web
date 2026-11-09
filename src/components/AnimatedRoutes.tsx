@@ -6,6 +6,8 @@ import { AboutPage } from '../pages/AboutPage';
 import { LinksPage } from '../pages/LinksPage';
 import { SearchPage } from '../pages/SearchPage';
 import { WikiRedirect } from '../pages/WikiRedirect';
+import { LinkErrorPage } from '../pages/LinkErrorPage';
+import { NotFoundPage } from '../pages/NotFoundPage';
 
 export const AnimatedRoutes: React.FC = () => {
   const location = useLocation();
@@ -40,6 +42,8 @@ export const AnimatedRoutes: React.FC = () => {
         <Route path="/links" element={<LinksPage />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/wiki-redirect" element={<WikiRedirect />} />
+        <Route path="/link-error" element={<LinkErrorPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
   );
