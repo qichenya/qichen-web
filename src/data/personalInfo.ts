@@ -2,7 +2,7 @@ export const personalInfo = {
   name: 'QICHEN',
   title: '',
   location: '吉林 · 长春',
-  email: 'qichenstudio@qq.com',
+  email: 'qichen@qichen.ink',
   qq: '3654280169',
   github: 'https://github.com/qichenya',
   telegram: 'https://t.me/qichen_sama',
@@ -13,10 +13,10 @@ export const personalInfo = {
 喜欢折腾各种服务器和自动化工具，每天都在学习新东西。虽然还是新手，但有一颗热爱技术的心。
 
 目前主要在学习 Linux、容器化和自动化运维，希望以后能成为一个合格的运维工程师。`,
-  interests: ['Linux Shell'],
+  interests: ['Linux'],
   focusDirections: [
-    { name: 'Linux Shell', outlined: false },
-    { name: '自动化', outlined: true },
-    { name: '嵌入式', outlined: true },
+    { name: 'Linux', outlined: false },
+    { name: 'WAF', outlined: true },
+    { name: 'Worker', outlined: true },
   ],
 };

@@ -68,7 +68,7 @@ src/
 export const personalInfo = {
   name: 'QICHEN',
   location: '吉林 · 长春',
-  email: 'qichenstudio@qq.com',
+  email: 'qichen@qichen.ink',
   qq: '3654280169',
   github: 'https://github.com/qichenya',
   telegram: 'https://t.me/qichen_sama',

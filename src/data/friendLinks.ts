@@ -23,5 +23,15 @@ export const friendLinks: FriendLink[] = [
     name: 'Lufu_Enter',
     url: 'https://www.lufusblog.top',
     description: '爱摸鱼的幻想家',
-  }
+  },
+  {
+    name: 'uwu.uwa',
+    url: 'https://uwaspace.work/',
+    description: '天才少女uwa，堂堂登场',
+  },
+  {
+    name: "诺雅狐's Blog",
+    url: 'https://blog.foxnature.net/',
+    description: '我不是狐，却借狐名；你若唤我狐狐，我便答应。',
+  },
 ];

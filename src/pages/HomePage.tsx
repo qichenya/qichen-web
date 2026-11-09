@@ -7,8 +7,8 @@ import { FONT_DOTS, FONT_MONO, PAGE_MAX_WIDTH } from '../theme/theme';
 import gsap from 'gsap';
 
 const readout: { label: string; value: string }[] = [
-  { label: 'STATUS', value: '持续学习中' },
-  { label: 'FOCUS', value: 'Linux · 自动化 · 嵌入式' },
+  { label: 'STATUS', value: '摆烂中' },
+  { label: 'FOCUS', value: 'Linux WAF Worker' },
   { label: 'LOCATION', value: personalInfo.location },
   { label: 'CONTACT', value: personalInfo.email },
 ];
@@ -93,7 +93,7 @@ export const HomePage: React.FC = () => {
                 CURRENTLY EXPLORING
               </Typography>
               <Typography sx={{ fontFamily: FONT_MONO, fontSize: 15, letterSpacing: '0.02em', mt: 0.25 }}>
-                Linux · Automation · Infrastructure
+                Linux · WAF · Worker
               </Typography>
             </Box>
           </Stack>
