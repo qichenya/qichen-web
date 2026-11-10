@@ -39,4 +39,9 @@ export const friendLinks: FriendLink[] = [
     url: 'https://70centsapple.top/',
     description: 'Be innocent, be confident.',
   },
+  {
+    name: 'heiyaha',
+    url: 'https://www.heiyaha.cn/',
+    description: 'heiyaha的小窝喵~',
+  },
 ];
