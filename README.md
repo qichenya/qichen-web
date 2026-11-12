@@ -115,6 +115,26 @@ export const friendLinks: FriendLink[] = [
 ];
 ```
 
+### 配置跳转白名单与黑名单
+
+`/link-error` 的跳转规则：
+
+- **白名单**：`friendLinks` 自动加入，额外允许的地址写在 `src/data/linkWhitelist.ts` 的 `extraAllowedLinks`，按完整 URL 匹配
+- **黑名单**：写在 `src/data/linkBlacklist.ts` 的 `blockedLinks`，按域名匹配，优先级高于白名单
+- **两者都不在**：显示警告页，访问者可以手动点击「仍然前往」
+
+```typescript
+// src/data/linkWhitelist.ts
+export const extraAllowedLinks: string[] = [
+  // 'https://your-domain.com',
+];
+
+// src/data/linkBlacklist.ts
+export const blockedLinks: string[] = [
+  // 'spam.com',
+];
+```
+
 ### 调整主题色
 
 主题定义在 `src/theme/theme.ts`：`createLightTheme` / `createDarkTheme` 中的 `palette.primary.main` 控制强调色（默认 Nothing 红 `#D71921`），`FONT_DOTS`、`FONT_MONO`、`FONT_TEXT` 控制字体栈。
